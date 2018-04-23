@@ -3,16 +3,16 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var handlebars = require('express3-handlebars')
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const handlebars = require('express3-handlebars')
 
-var index = require('./routes/index');
+const index = require('./routes/index');
 // Example route
-// var user = require('./routes/user');
+// const user = require('./routes/user');
 
-var app = express();
+const app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -29,10 +29,37 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+const fakeDataBase = {
+	'Kobe': {ppg: '20', mpg: '40', best: 'Staples Center', worst: 'Moda Center', img: 'kobe.png'},
+	'Lebron': {ppg: '25', mpg: '43', best: 'Quicken Loan Arena', worst: 'United Center', img: 'lebron.png'},
+	'Kevin': {ppg: '30', mpg: '35', best: 'Oracle Arena', worst: 'Air Canada Centre', img: 'durant.png'},
+	'James': {ppg: '33', mpg: '34', best: 'Toyota Center', worst: 'Wells Fargo Center', img: 'harden.png'},
+	'Joel': {ppg: '22', mpg: '30', best: 'Wells Fargo Center', worst: 'TD Garden', img: 'embiid.png'} 
+};
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+//Show all players to the screen
+app.get('/players', (req,res) =>{
+	console.log("get request is working");
+	const allPlayers = Object.keys(fakeDataBase);
+	res.send(allPlayers);
+});
+
+//grab one players information
+app.get('/players/:playerName', (req,res) => {
+	const playerSearch = req.params.playerName;
+	const val = fakeDataBase[playerSearch]
+	console.log(val);
+	if(val){
+		res.send(val);
+	}else{
+		res.send({}); //failed so return empty object
+	}
+});
 
 app.get('/', index.view);
 // Example route
