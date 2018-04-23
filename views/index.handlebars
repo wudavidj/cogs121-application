@@ -1,21 +1,32 @@
 <html>
 <head>
 <title>Rankings</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(() => {
+	console.log(rank1);
+	$('#rank1').click(() =>{
+		console.log("Submit");
+	});
+});
+
+</script>
+
 </head>
 <body>
- <h1>Rankings</h1>
- <ol type="1">
-  <li><a href="Bryant">Bryant</a></li>
-  <li><a href="Lebron">Lebron</a></li>
-  <li><a href="Jordan">Jordan</a></li>
-<li><a href="Odom">Odom</a></li>
-<li><a href="Paul">Paul</a></li>
-</ol>
-<form class="example" action="/action_page.php">
-  <input type="text" placeholder="Search Player" name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form>
+	<h1>Rankings</h1>
+	<ol type="1">
+	<li id="rank1"><a href="/players/Kobe">Kobe Bryant</a></li>
+	<li id="rank2"><a href="/players/Lebron">Lebron James</a></li>
+	<li id="rank3"><a href="/players/Durant">Kevin Durant</a></li>
+	<li id="rank4"><a href="/players/Harden">James Harden</a></li>
+	<li id="rank5"><a href="/players/Embiid">Joel Embiid</a></li>
+	</ol>
+	<form class="example" action="/action_page.php">
+	<input type="text" placeholder="Search Player" name="search">
+	<button type="submit" id="submitBtn"><i class="fa fa-search"></i>Find Player</button>
+	</form>
+<hr/>
 
- <hr/>
 </body>
 </html>
