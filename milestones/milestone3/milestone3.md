@@ -1,6 +1,7 @@
 # UI Skeleton
 ## Home Page
-![Home](/milestones/milestone3/home.jpg)
+![Home](/milestones/milestone3/home1.jpg)
+![Home](/milestones/milestone3/home2.jpg)
 
 ## Individual Player Page
 ![Player](/milestones/milestone3/player.jpg)
