@@ -10,6 +10,7 @@ const handlebars = require('express3-handlebars');
 
 const index = require('./routes/index');
 const player = require('./routes/player');
+const compare = require('./routes/compare');
 // Example route
 // const user = require('./routes/user');
 
@@ -65,6 +66,7 @@ app.get('/players/:playerName', (req,res) => {
 
 app.get('/', index.view);
 app.get('/player', player.view);
+app.get('/compare', compare.view)
 // Example route
 // app.get('/users', user.list);
 

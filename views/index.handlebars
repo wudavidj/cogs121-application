@@ -22,10 +22,15 @@ $(document).ready(() => {
 	<li id="rank4"><a href="/players/Harden">James Harden</a></li>
 	<li id="rank5"><a href="/players/Embiid">Joel Embiid</a></li>
 	</ol>
-	<form class="example" action="/action_page.php">
-	<input type="text" placeholder="Search Player" name="search">
-	<button type="submit" id="submitBtn"><i class="fa fa-search"></i>Find Player</button>
-	</form>
+	Search Player: <input id="nameBox" type="text" size="20"/>
+  <button id="searchButton">Find Player</button>
+
+	<div>Google Maps API will go here.</div>
+  <script type="text/javascript">
+    document.getElementById("searchButton").onclick = function () {
+        location.href = "/player";
+    };
+</script>
 <hr/>
 
 </body>
