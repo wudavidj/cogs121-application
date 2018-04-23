@@ -6,9 +6,10 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const handlebars = require('express3-handlebars')
+const handlebars = require('express3-handlebars');
 
 const index = require('./routes/index');
+const player = require('./routes/player');
 // Example route
 // const user = require('./routes/user');
 
@@ -34,7 +35,7 @@ const fakeDataBase = {
 	'Lebron': {ppg: '25', mpg: '43', best: 'Quicken Loan Arena', worst: 'United Center', img: 'lebron.png'},
 	'Kevin': {ppg: '30', mpg: '35', best: 'Oracle Arena', worst: 'Air Canada Centre', img: 'durant.png'},
 	'James': {ppg: '33', mpg: '34', best: 'Toyota Center', worst: 'Wells Fargo Center', img: 'harden.png'},
-	'Joel': {ppg: '22', mpg: '30', best: 'Wells Fargo Center', worst: 'TD Garden', img: 'embiid.png'} 
+	'Joel': {ppg: '22', mpg: '30', best: 'Wells Fargo Center', worst: 'TD Garden', img: 'embiid.png'}
 };
 
 // development only
@@ -51,6 +52,7 @@ app.get('/players', (req,res) =>{
 
 //grab one players information
 app.get('/players/:playerName', (req,res) => {
+	console.log("hello");
 	const playerSearch = req.params.playerName;
 	const val = fakeDataBase[playerSearch]
 	console.log(val);
@@ -62,6 +64,7 @@ app.get('/players/:playerName', (req,res) => {
 });
 
 app.get('/', index.view);
+app.get('/player', player.view);
 // Example route
 // app.get('/users', user.list);
 
