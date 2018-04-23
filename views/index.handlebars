@@ -10,6 +10,18 @@ $(document).ready(() => {
 	});
 });
 
+$(document).ready(() => {
+  $('#stadiumButton').click(() => {
+		$.ajax({
+		 url: 'players/',
+		 type: 'GET',
+		 dataType : 'json',
+		 success: (data) => {
+			 console.log('You received some data!', data);
+			 $('#status').html('All users: ' + data);
+		 },
+	 });
+ });
 </script>
 
 </head>
@@ -24,6 +36,7 @@ $(document).ready(() => {
 	</ol>
 	Search Player: <input id="nameBox" type="text" size="20"/>
   <button id="searchButton">Find Player</button>
+	<button id="stadiumButton">Get current stadiums</button>
 
 	<div>Google Maps API will go here.</div>
   <script type="text/javascript">
@@ -33,5 +46,6 @@ $(document).ready(() => {
 </script>
 <hr/>
 
+<div id="status"></div>
 </body>
 </html>
