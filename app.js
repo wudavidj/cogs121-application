@@ -39,6 +39,14 @@ const fakeDataBase = {
 	'Joel': {ppg: '22', mpg: '30', best: 'Wells Fargo Center', worst: 'TD Garden', img: 'embiid.png'}
 };
 
+const fakeMatches = {
+  'Cavaliers': {opponent: 'Lakers'},
+  'Rockets': {opponent: 'Clippers'},
+  'Sixers': {opponent: 'Heat'},
+  'Pelicans': {opponent: 'Warriors'},
+  'Thunders': {opponent: 'Jazz'}
+};
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -53,15 +61,31 @@ app.get('/players', (req,res) =>{
 
 //grab one players information
 app.get('/players/:playerName', (req,res) => {
-	console.log("hello");
 	const playerSearch = req.params.playerName;
-	const val = fakeDataBase[playerSearch]
+	const val = fakeDataBase[playerSearch];
 	console.log(val);
 	if(val){
 		res.send(val);
 	}else{
 		res.send({}); //failed so return empty object
 	}
+});
+
+app.get('/matches', (req,res) => {
+   console.log("get match works");
+   const allMatches = Object.keys(fakeMatches);
+   res.send(allMatches);
+});
+
+app.get('/matches/:teamName', (req,res) => {
+  const teamSearch = req.params.teamName;
+  const val = fakeMatches[teamSearch];
+  console.log(val);
+  if(val){
+    res.send(val);
+  }else{
+    res.send({}); //failed so return empty object
+  }
 });
 
 app.get('/', index.view);
