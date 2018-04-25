@@ -1,5 +1,7 @@
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/main.css" rel="stylesheet">
 <title>Rankings</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -67,6 +69,8 @@ $(document).ready(() => {
 </head>
 <body>
 	<h1>Rankings</h1>
+  <div class="row">
+  <div class="column" >
 	<ol type="1">
 	<li id="rank1"><a href="/players/Kobe">Kobe Bryant</a></li>
 	<li id="rank2"><a href="/players/Lebron">Lebron James</a></li>
@@ -74,6 +78,17 @@ $(document).ready(() => {
 	<li id="rank4"><a href="/players/Harden">James Harden</a></li>
 	<li id="rank5"><a href="/players/Embiid">Joel Embiid</a></li>
 	</ol>
+</div>
+<div class="column" >
+  <ol type="1">
+    <li id="rank1"><a href="/teams/Lakers">Lakers</a></li>
+    <li id="rank2"><a href="/teams/Jets">Jets</a></li>
+    <li id="rank3"><a href="/teams/Wizards">Wizards</a></li>
+    <li id="rank4"><a href="/teams/Clippers">Clippers</a></li>
+    <li id="rank5"><a href="/teams/Warriors">Warriors</a></li>
+  </ol>
+</div>
+</div>
 	Search Player: <input id="nameBox" type="text" size="20"/>
   	<button id="searchButton">Find Player</button>
 	<button id="stadiumButton">Get Current Stadiums</button>
