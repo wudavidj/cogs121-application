@@ -10,7 +10,9 @@ const handlebars = require('express3-handlebars');
 
 const index = require('./routes/index');
 const player = require('./routes/player');
-const compare = require('./routes/compare');
+const team = require('./routes/team');
+const comparePlayer = require('./routes/comparePlayer');
+const compareTeam = require('./routes/compareTeam');
 // Example route
 // const user = require('./routes/user');
 
@@ -90,7 +92,9 @@ app.get('/matches/:teamName', (req,res) => {
 
 app.get('/', index.view);
 app.get('/player', player.view);
-app.get('/compare', compare.view)
+app.get('/team', team.view);
+app.get('/comparePlayer', comparePlayer.view);
+app.get('/compareTeam', compareTeam.view);
 // Example route
 // app.get('/users', user.list);
 
