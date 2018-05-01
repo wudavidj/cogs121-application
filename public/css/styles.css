@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+body {
+  background-color: #F1F5F8;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ACACAC;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ACACAC;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+  padding-top: 20px;
+}
+
+h4 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.content-card {
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 60px;
+  box-shadow: 0px 0px 4px #CCCCCC;
+}
+
+#player-detail {
+  height: 260px;
+  margin-bottom: 40px;
+}
+
+#player-statistics {
+  height: 600px;
+}
+
+#player-trending {
+  height: 600px;
+}
+
+.player-bio {
+  float: left;
+  width: 280px;
+  padding-right: 60px;
+  border-right-style: solid;
+  border-right-color: #DDDDDD;
+  border-right-width: 2px;
+}
+
+.player-picture-wrapper {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #ACACAC;
+  width: 160px;
+  height: 160px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+.player-picture {
+  width: auto;
+  height: 100%;
+  margin-left: -30px;
+}
+
+.player-information {
+  float: left;
+  width: 220px;
+}
+
+#one {
+  margin-left: 100px;
+}
+
+.two-section {
+  margin-bottom: 80px;
+}
+#left-double-section {
+  float: left;
+  width: 600px;
+}
+
+#right-double-section {
+  float: right;
+  width: 600px;
+}
