@@ -36,6 +36,24 @@ h4 {
   color: #000000;
 }
 
+.data-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ACACAC;
+  text-transform: uppercase;
+}
+
+.data-value {
+  font-size: 24px;
+  font-weight: 400;
+  color: #000000;
+}
+
+td {
+  padding-right: 80px;
+  padding-bottom: 40px;
+}
+
 .content-card {
   background-color: #FFFFFF;
   border-radius: 8px;
