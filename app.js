@@ -17,6 +17,11 @@ const compareTeam = require('./routes/compareTeam');
 // const user = require('./routes/user');
 
 const app = express();
+const sqlite3 = require('sqlite3');
+const players = new sqlite3.Database('players.db');
+const teams = new sqlite3.Database('teams.db');
+const games = new sqlite3.Database('games.db');
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -57,26 +62,74 @@ if ('development' == app.get('env')) {
 //Show all players to the screen
 app.get('/players', (req,res) =>{
 	console.log("get request is working");
-	const allPlayers = Object.keys(fakeDataBase);
-	res.send(allPlayers);
+	players.all('SELECT * FROM playerstable', (err, rows) => {
+    res.send(rows);
+  });
 });
 
 //grab one players information
 app.get('/players/:playerName', (req,res) => {
+/*
+TODO: WORK ON MIDDLE NAME AND SPLICING  
+*/
 	const playerSearch = req.params.playerName;
-	const val = fakeDataBase[playerSearch];
-	console.log(val);
-	if(val){
-		res.send(val);
-	}else{
-		res.send({}); //failed so return empty object
-	}
+  let first = playerSearch.charAt(0);
+  let last = "";
+  let found = false;
+  for(let x=1; x < playerSearch.length; x++){
+    if(playerSearch.charAt(x) == playerSearch.charAt(x).toUpperCase()){
+      found = true;
+    }
+    if(found){
+      last += playerSearch.charAt(x);
+    }else{
+      first += playerSearch.charAt(x);
+    }
+  }
+  console.log("First: " + first);
+  console.log("Last: " + last);
+  const fullName = first + " " + last;
+	console.log('Search for: ' + fullName);
+  players.all(
+    'SELECT * FROM playerstable WHERE name = $name', //SQL query
+    { $name: fullName}, //parameters to pass into SQL query
+    (err, rows) => {
+      if(rows.length > 0){
+        res.send(rows[0]);
+      }else{
+        res.send({});
+      }
+    });
 });
 
+//gets all the teams
+//WORK ON LOOKING UP STRING WITH TEAM NAME NOT ABBREVIATION
+app.get('/teams', (req, res) => {
+  teams.all('SELECT team, overall, home, road FROM teamstable', (err, rows) =>{
+    res.send(rows);
+  });
+});
+
+
+//get a single team record
+app.get('/teams/:teamName', (req, res) => {
+  const teamSearch = req.params.teamName;
+  teams.all('SELECT * FROM teamstable WHERE abv = $team',
+    {$team: teamSearch},
+    (err, rows) => {
+      if(rows.length > 0){
+        res.send(rows[0]);
+      }else{
+        res.send({});
+      }
+  });
+});
+
+//gets all the matches
 app.get('/matches', (req,res) => {
-   console.log("get match works");
-   const allMatches = Object.keys(fakeMatches);
-   res.send(allMatches);
+  games.all('SELECT visitor, visitorPoints, home, homePoints FROM gamestable', (err, rows) => {
+    res.send(rows);
+  });
 });
 
 app.get('/matches/:teamName', (req,res) => {
