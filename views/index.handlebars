@@ -7,76 +7,136 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(() => {
-  $('#stadiumButton').click(() => {
-$.ajax({
-url: 'players/',
-type: 'GET',
-dataType : 'json',
-success: (data) => {
-console.log('You received some data!', data);
-$('#status').html('All users: ' + data);
-},
-});
- });
-
 $('#searchButton').click(() => {
 const reqUrl = 'players/' + $('#nameBox').val();
+/*
+TODO: WORK ON REMOVE SPACE BETWEEN NAMES
+*/
 console.log(reqUrl);
-$.ajax({
-url: reqUrl,
-type: 'GET',
-dataType: 'json',
-success: (data) => {
-if(data.ppg && data.mpg && data.best && data.worst && data.img){
-console.log("Found player: ", data);
-if(data.img == "kobe.png"){
-location.href = "/player";
-}
-}else{
-console.log("Error, could not find ", data);
-}
-},
-});
+  $.ajax({
+  url: reqUrl,
+  type: 'GET',
+  dataType: 'json',
+  success: (data) => {
+    $('#name').html("Name: " + data.name);
+    $('#position').html("Position: " + data.position);
+    $('#fieldGoal').html("FG%: " + data.fieldGoalPercent);
+    $('#freeThrow').html("FT%: " + data.freeThrowPercent);
+    $('#rebounds').html("RPG: " + data.rebound);
+    $('#assists').html("APG: " + data.assist);
+    $('#blocks').html("BPG: " + data.block);
+    $('#minutes').html("MPG: " + data.minutesPlayed);
+    $('#points').html("PPG: " + data.points);
+    },
+  });
 });
 
 $('#matchButton').click(() =>{
-$.ajax({
-url: 'matches/',
-type: 'GET',
-dataType: 'json',
-success: (data) => {
-$('#matches').append("<b>" + "Todays Games" + "</b>");
-data.forEach(function(par) {
-$.ajax({
-url: 'matches/' + par,
-type: 'GET',
-dataType: 'json',
-success: (data) =>{
-$('#matches').append("<ul>" + par + " vs. " + data.opponent + "</ul>");
-console.log(data);
-},
-});
-});
-},
-});
+  $.ajax({
+  url: 'matches/',
+  type: 'GET',
+  dataType: 'json',
+  success: (data) => {
+    $('#matches').append("<b>" + "Todays Games" + "</b>");
+    data.forEach(function(par) {
+      $.ajax({
+      url: 'matches/' + par,
+      type: 'GET',
+      dataType: 'json',
+      success: (data) =>{
+        $('#matches').append("<ul>" + par + " vs. " + data.opponent + "</ul>");
+        console.log(data);
+        },
+      });
+    });
+  },
+  });
 });
 
-  $('#rankingsButton').click(() => {
-$.ajax({
-url: 'players/',
-type: 'GET',
-dataType : 'json',
-success: (data) => {
-console.log('You received some data!', data);
-$('#status').html('All users: ' + data);
-},
+$('#rankingsButton').click(() => {
+  $.ajax({
+  url: 'players/',
+  type: 'GET',
+  dataType : 'json',
+  success: (data) => {
+    console.log('You received some data!', data);
+    $('#status').html('All users: ' + data);
+    },
+  });
 });
+
+//TEAM STANDING BUTTONS
+$('#team1').click(() => {
+  $.ajax({
+    url: 'teams/HOU',
+    type: 'GET',
+    dataType: 'json',
+    success: (data) => {
+      $('#overall1').html('Overall Record: ' + data.overall);
+      $('#home1').html('Home Record: ' + data.home);
+      $('#away1').html('Away Record: ' + data.road);
+    },
+  });
+});
+
+$('#team2').click(() => {
+  $.ajax({
+    url: 'teams/TOR',
+    type: 'GET',
+    dataType: 'json',
+    success: (data) => {
+      $('#overall2').html('Overall Record: ' + data.overall);
+      $('#home2').html('Home Record: ' + data.home);
+      $('#away2').html('Away Record: ' + data.road);
+     },
  });
+});
+
+$('#team3').click(() => {
+  $.ajax({
+    url: 'teams/GSW',
+    type: 'GET',
+    dataType: 'json',
+    success: (data) => {
+      $('#overall3').html('Overall Record: ' + data.overall);
+      $('#home3').html('Home Record: ' + data.home);
+      $('#away3').html('Away Record: ' + data.road);
+     },
+ });
+});
+
+$('#team4').click(() => {
+  $.ajax({
+    url: 'teams/BOS',
+    type: 'GET',
+    dataType: 'json',
+    success: (data) => {
+      $('#overall4').html('Overall Record: ' + data.overall);
+      $('#home4').html('Home Record: ' + data.home);
+      $('#away4').html('Away Record: ' + data.road);
+     },
+ });
+});
+
+$('#team5').click(() => {
+  $.ajax({
+    url: 'teams/PHI',
+    type: 'GET',
+    dataType: 'json',
+    success: (data) => {
+      $('#overall5').html('Overall Record: ' + data.overall);
+      $('#home5').html('Home Record: ' + data.home);
+      $('#away5').html('Away Record: ' + data.road);
+     },
+ });
+});
+
 
 $(document).ajaxError(() => {
-$('#status').html('Error: unknown ajax error!');
+  $('#status').html('Error: unknown ajax error!');
+  });
 });
-});
+
 </script>
 
 </head>
@@ -87,25 +147,50 @@ $('#status').html('Error: unknown ajax error!');
   <div class="content-card" id="player-rankings">
 
 <ol type="1">
-<li id="rank1"><a href="/players/Kobe">Kobe Bryant</a></li>
-<li id="rank2"><a href="/players/Lebron">Lebron James</a></li>
-<li id="rank3"><a href="/players/Durant">Kevin Durant</a></li>
-<li id="rank4"><a href="/players/Harden">James Harden</a></li>
-<li id="rank5"><a href="/players/Embiid">Joel Embiid</a></li>
+<li id="rank1"><a href="/players/JamesHarden">James Harden</a></li>
+<li id="rank2"><a href="/players/AnthonyDavis">Anthony Davis</a></li>
+<li id="rank3"><a href="/players/GiannisAntetokounmpo">Giannis Antetokounmpo</a></li>
+<li id="rank4"><a href="/players/DamianLillard">Damian Lillard</a></li>
+<li id="rank5"><a href="/players/Stephen Curry">Stephen Curry</a></li>
 </ol>
 </div>
 </div>
 <button id="rankingsButton">More Rankings</button>
 
-    <div class="three-section" id="middle-triple-section">
-    <h1>Team Rankings</h1>
-    <div class="content-card" id="player-trending">
+<div class="three-section" id="middle-triple-section">
+  <h1>Overall Standings</h1>
+  <div class="content-card" id="player-trending">
   <ol type="1">
-    <li id="rank1"><a href="/teams/Lakers">Lakers</a></li>
-    <li id="rank2"><a href="/teams/Jets">Jets</a></li>
-    <li id="rank3"><a href="/teams/Wizards">Wizards</a></li>
-    <li id="rank4"><a href="/teams/Clippers">Clippers</a></li>
-    <li id="rank5"><a href="/teams/Warriors">Warriors</a></li>
+  <li>
+    <button id="team1">Houston Rockets</button>
+    <div id="overall1"></div>
+    <div id="home1"></div>
+    <div id="away1"></div>
+  </li>
+  <li>
+    <button id="team2">Toronto Raptors</button>
+    <div id="overall2"></div>
+    <div id="home2"></div>
+    <div id="away2"></div>
+  </li>
+  <li>
+    <button id="team3">Golden State Warriors</button>
+    <div id="overall3"></div>
+    <div id="home3"></div>
+    <div id="away3"></div>
+  </li>
+  <li>
+    <button id="team4">Boston Celtics</button>
+    <div id="overall4"></div>
+    <div id="home4"></div>
+    <div id="away4"></div>
+  </li>
+  <li>
+    <button id="team5">Philadelphia 76ers</button>
+    <div id="overall5"></div>
+    <div id="home5"></div>
+    <div id="away5"></div>
+  </li>
   </ol>
 </div>
 </div>
@@ -114,7 +199,7 @@ $('#status').html('Error: unknown ajax error!');
 <h1>Upcoming Games</h1>
 <div class="content-card" id="player-trending">
 <ol type="1">
-<li id="rank1">Lakers vs. Jets</li>
+<li id="rank1">Lakers vs. Magics</li>
 <li id="rank2">Wizards vs. Clippers</li>
 <li id="rank3">Warriors vs. Cavaliers</li>
 <li id="rank4">Raptors vs. Pelicans</li>
@@ -124,15 +209,21 @@ $('#status').html('Error: unknown ajax error!');
 </div>
 
 Search Player: <input id="nameBox" type="text" size="20"/>
-  <button id="searchButton">Find Player</button>
-<button id="stadiumButton">Get Current Stadiums</button>
-<button id="matchButton">Display Matches</button>
+<button id="searchButton">Find Player</button>
+{{!<button id="matchButton">Display Matches</button>}}
 
-<div>Google Maps API will go here.</div>
+{{!<div>Google Maps API will go here.</div>}}
 <hr/>
 
-<div id="status"></div>
-<div id="currentPlayer"></div>
-<div id="matches"></div>
+<div id="name"></div>
+<div id="position"></div>
+<div id="fieldGoal"></div>
+<div id="freeThrow"></div>
+<div id="rebounds"></div>
+<div id="assists"></div>
+<div id="steals"></div>
+<div id="blocks"></div>
+<div id="minutes"></div>
+<div id="points"></div>
 </body>
 </html>

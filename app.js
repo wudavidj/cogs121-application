@@ -54,7 +54,7 @@ app.get('/players', (req,res) =>{
 //grab one players information
 app.get('/players/:playerName', (req,res) => {
 /*
-TODO: WORK ON MIDDLE NAME AND SPLICING  
+TODO: WORK ON MIDDLE NAME AND SPLICING
 */
 	const playerSearch = req.params.playerName;
   let first = playerSearch.charAt(0);
@@ -125,6 +125,7 @@ app.get('/matches/:teamName', (req,res) => {
 });
 
 app.get('/', index.view);
+app.get('/indexOriginal', indexOriginal.view);
 app.get('/player', player.view);
 app.get('/team', team.view);
 app.get('/comparePlayer', comparePlayer.view);

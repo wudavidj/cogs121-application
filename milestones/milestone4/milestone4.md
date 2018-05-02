@@ -1,6 +1,6 @@
 # UI Skeleton
 ## Home Page
-Pictures required
+![Home](/milestones/milestone4/home.png)
 
 ## Player Page
 ![Player](/milestones/milestone4/player.png)
