@@ -138,7 +138,8 @@ $(document).ajaxError(() => {
 </script>
 </head>
 <body>
-    <div class="three-section" id="left-triple-section">
+  <div class="three-section">
+    <div id="left-triple-section">
 <h1>Rankings</h1>
 
   <div class="content-card" id="player-rankings">
@@ -150,11 +151,14 @@ $(document).ajaxError(() => {
 <li id="rank4"><a href="/players/DamianLillard">Damian Lillard</a></li>
 <li id="rank5"><a href="/players/Stephen Curry">Stephen Curry</a></li>
 </ol>
-</div>
-</div>
-<!-- <button id="rankingsButton">More Rankings</button> -->
 
-<div class="three-section" id="middle-triple-section">
+</div>
+<div>
+  <button id="compareButton">Compare Players</button>
+</div>
+</div>
+
+<div id="middle-triple-section">
   <h1>Overall Standings</h1>
   <div class="content-card" id="player-trending">
   <ol type="1">
@@ -192,7 +196,8 @@ $(document).ajaxError(() => {
 </div>
 </div>
 
-<div class="three-section" id="right-triple-section">
+
+<div id="right-triple-section">
 <h1>Upcoming Games</h1>
 <div class="content-card" id="player-trending">
 <ol type="1">
@@ -204,9 +209,11 @@ $(document).ajaxError(() => {
 </ol>
 </div>
 </div>
+</div>
 
 Search Player: <input id="nameBox" type="text" size="20"/>
 <button id="searchButton">Find Player</button>
+
 {{!<button id="matchButton">Display Matches</button>}}
 
 {{!<div>Google Maps API will go here.</div>}}
