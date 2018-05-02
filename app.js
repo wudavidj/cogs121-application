@@ -38,22 +38,6 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-const fakeDataBase = {
-	'Kobe': {ppg: '20', mpg: '40', best: 'Staples Center', worst: 'Moda Center', img: 'kobe.png'},
-	'Lebron': {ppg: '25', mpg: '43', best: 'Quicken Loan Arena', worst: 'United Center', img: 'lebron.png'},
-	'Kevin': {ppg: '30', mpg: '35', best: 'Oracle Arena', worst: 'Air Canada Centre', img: 'durant.png'},
-	'James': {ppg: '33', mpg: '34', best: 'Toyota Center', worst: 'Wells Fargo Center', img: 'harden.png'},
-	'Joel': {ppg: '22', mpg: '30', best: 'Wells Fargo Center', worst: 'TD Garden', img: 'embiid.png'}
-};
-
-const fakeMatches = {
-  'Cavaliers': {opponent: 'Lakers'},
-  'Rockets': {opponent: 'Clippers'},
-  'Sixers': {opponent: 'Heat'},
-  'Pelicans': {opponent: 'Warriors'},
-  'Thunders': {opponent: 'Jazz'}
-};
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -86,10 +70,7 @@ TODO: WORK ON MIDDLE NAME AND SPLICING
       first += playerSearch.charAt(x);
     }
   }
-  console.log("First: " + first);
-  console.log("Last: " + last);
   const fullName = first + " " + last;
-	console.log('Search for: ' + fullName);
   players.all(
     'SELECT * FROM playerstable WHERE name = $name', //SQL query
     { $name: fullName}, //parameters to pass into SQL query
