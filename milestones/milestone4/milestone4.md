@@ -3,16 +3,16 @@
 Pictures required
 
 ## Player Page
-Pictures required
+![Player](/milestones/milestone4/player.png)
 
 ## Team Page
-Pictures required
+![Team](/milestones/milestone4/team.png)
 
 ## Compare Player Page
-Pictures required
+![Compare Player](/milestones/milestone4/comparePlayer.png)
 
 ## Compare Team Page
-Pictures required
+![Compare Team](/milestones/milestone4/compareTeam.png)
 
 # Written Explanation
 Our UI skeletons improved considerably in both their information architecture and visual design/layout. We decided on all the core features and design layouts and started to design each page according to those principles.
