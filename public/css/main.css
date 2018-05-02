@@ -1,16 +1,51 @@
-<style>
-* {
-    box-sizing: border-box;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+body {
+  background-color: #F1F5F8;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
-.row {
-    display: flex;
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ACACAC;
+  text-transform: uppercase;
 }
 
-/* Create two equal columns that sits next to each other */
-.column {
-    flex: 50%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+
+h4 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #000000;
 }
-</style>
+
+.content-card {
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 60px;
+  box-shadow: 0px 0px 4px #CCCCCC;
+}
+
+.left-triple-section {
+  width:600px;
+  height:600px;
+  float:left;
+  background-color:pink;
+}
+
+.middle-triple-section {
+  width:370px;
+  height:150px;
+  float:left;
+  background-color:blue;
+}
+
+.right-triple-section {
+  width:370px;
+  height:150px;
+  float:left;
+  background-color:purple;
+}

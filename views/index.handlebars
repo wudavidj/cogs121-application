@@ -8,79 +8,98 @@
 <script>
 $(document).ready(() => {
   $('#stadiumButton').click(() => {
-		$.ajax({
-		 url: 'players/',
-		 type: 'GET',
-		 dataType : 'json',
-		 success: (data) => {
-			 console.log('You received some data!', data);
-			 $('#status').html('All users: ' + data);
-		 },
-	 });
+$.ajax({
+url: 'players/',
+type: 'GET',
+dataType : 'json',
+success: (data) => {
+console.log('You received some data!', data);
+$('#status').html('All users: ' + data);
+},
+});
  });
 
-	$('#searchButton').click(() => {
-		const reqUrl = 'players/' + $('#nameBox').val();
-		console.log(reqUrl);
-		$.ajax({
-			url: reqUrl,
-			type: 'GET',
-			dataType: 'json',
-			success: (data) => {
-				if(data.ppg && data.mpg && data.best && data.worst && data.img){
-					console.log("Found player: ", data);
-					if(data.img == "kobe.png"){
-						location.href = "/player";
-					}
-				}else{
-					console.log("Error, could not find ", data);
-				}
-			},
-		});
-	});
+$('#searchButton').click(() => {
+const reqUrl = 'players/' + $('#nameBox').val();
+console.log(reqUrl);
+$.ajax({
+url: reqUrl,
+type: 'GET',
+dataType: 'json',
+success: (data) => {
+if(data.ppg && data.mpg && data.best && data.worst && data.img){
+console.log("Found player: ", data);
+if(data.img == "kobe.png"){
+location.href = "/player";
+}
+}else{
+console.log("Error, could not find ", data);
+}
+},
+});
+});
 
-	$('#matchButton').click(() =>{
-		$.ajax({
-			url: 'matches/',
-			type: 'GET',
-			dataType: 'json',
-			success: (data) => {
-				$('#matches').append("<b>" + "Todays Games" + "</b>");
-				data.forEach(function(par) {
-					$.ajax({
-						url: 'matches/' + par,
-						type: 'GET',
-						dataType: 'json',
-						success: (data) =>{
-							$('#matches').append("<ul>" + par + " vs. " + data.opponent + "</ul>");
-							console.log(data);
-						},
-					});
-				});
-			},
-		});
-	});
+$('#matchButton').click(() =>{
+$.ajax({
+url: 'matches/',
+type: 'GET',
+dataType: 'json',
+success: (data) => {
+$('#matches').append("<b>" + "Todays Games" + "</b>");
+data.forEach(function(par) {
+$.ajax({
+url: 'matches/' + par,
+type: 'GET',
+dataType: 'json',
+success: (data) =>{
+$('#matches').append("<ul>" + par + " vs. " + data.opponent + "</ul>");
+console.log(data);
+},
+});
+});
+},
+});
+});
 
-	$(document).ajaxError(() => {
-		$('#status').html('Error: unknown ajax error!');
-	});
+  $('#rankingsButton').click(() => {
+$.ajax({
+url: 'players/',
+type: 'GET',
+dataType : 'json',
+success: (data) => {
+console.log('You received some data!', data);
+$('#status').html('All users: ' + data);
+},
+});
+ });
+
+$(document).ajaxError(() => {
+$('#status').html('Error: unknown ajax error!');
+});
 });
 </script>
 
 </head>
 <body>
-	<h1>Rankings</h1>
-  <div class="row">
-  <div class="column" >
-	<ol type="1">
-	<li id="rank1"><a href="/players/Kobe">Kobe Bryant</a></li>
-	<li id="rank2"><a href="/players/Lebron">Lebron James</a></li>
-	<li id="rank3"><a href="/players/Durant">Kevin Durant</a></li>
-	<li id="rank4"><a href="/players/Harden">James Harden</a></li>
-	<li id="rank5"><a href="/players/Embiid">Joel Embiid</a></li>
-	</ol>
+    <div class="three-section" id="left-triple-section">
+<h1>Rankings</h1>
+
+  <div class="content-card" id="player-rankings">
+
+<ol type="1">
+<li id="rank1"><a href="/players/Kobe">Kobe Bryant</a></li>
+<li id="rank2"><a href="/players/Lebron">Lebron James</a></li>
+<li id="rank3"><a href="/players/Durant">Kevin Durant</a></li>
+<li id="rank4"><a href="/players/Harden">James Harden</a></li>
+<li id="rank5"><a href="/players/Embiid">Joel Embiid</a></li>
+</ol>
 </div>
-<div class="column" >
+</div>
+<button id="rankingsButton">More Rankings</button>
+
+    <div class="three-section" id="middle-triple-section">
+    <h1>Team Rankings</h1>
+    <div class="content-card" id="player-trending">
   <ol type="1">
     <li id="rank1"><a href="/teams/Lakers">Lakers</a></li>
     <li id="rank2"><a href="/teams/Jets">Jets</a></li>
@@ -90,11 +109,26 @@ $(document).ready(() => {
   </ol>
 </div>
 </div>
-	Search Player: <input id="nameBox" type="text" size="20"/>
-  	<button id="searchButton">Find Player</button>
-	<button id="stadiumButton">Get Current Stadiums</button>
-	<button id="matchButton">Display Matches</button>
-	<div>Google Maps API will go here.</div>
+
+<div class="three-section" id="right-triple-section">
+<h1>Upcoming Games</h1>
+<div class="content-card" id="player-trending">
+<ol type="1">
+<li id="rank1">Lakers vs. Jets</li>
+<li id="rank2">Wizards vs. Clippers</li>
+<li id="rank3">Warriors vs. Cavaliers</li>
+<li id="rank4">Raptors vs. Pelicans</li>
+<li id="rank5">Nets vs. Knicks</li>
+</ol>
+</div>
+</div>
+
+Search Player: <input id="nameBox" type="text" size="20"/>
+  <button id="searchButton">Find Player</button>
+<button id="stadiumButton">Get Current Stadiums</button>
+<button id="matchButton">Display Matches</button>
+
+<div>Google Maps API will go here.</div>
 <hr/>
 
 <div id="status"></div>
