@@ -125,7 +125,7 @@ app.get('/matches/:teamName', (req,res) => {
 });
 
 app.get('/', index.view);
-app.get('/indexOriginal', indexOriginal.view);
+//app.get('/indexOriginal', indexOriginal.view);
 app.get('/player', player.view);
 app.get('/team', team.view);
 app.get('/comparePlayer', comparePlayer.view);
