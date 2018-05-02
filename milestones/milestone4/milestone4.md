@@ -1,9 +1,23 @@
 # UI Skeleton
-## Page
+## Home Page
 Pictures required
 
-# Written explanation
-written explanation of how your UI skeleton screenshots have improved upon the versions shown in milestone3.md.
+## Player Page
+Pictures required
+
+## Team Page
+Pictures required
+
+## Compare Player Page
+Pictures required
+
+## Compare Team Page
+Pictures required
+
+# Written Explanation
+Our UI skeletons improved considerably in both their information architecture and visual design/layout. We decided on all the core features and design layouts and started to design each page according to those principles.
+
+For our Home Page, we decided to expand upon our current iteration by adding a section dedicated for games. For our Player Page, in addition to deciding on a layout, we determined what information we wanted to put on the page. We decided on player details, player statistics, and created working versions of our Twitter Feed API. We decided on similar topics for the Team page and the remaining pages.
 
 # User Privacy
-thoughtful description of your project's approach to addressing user privacy. Use these lecture notes as the basis for thinking about your approach. (There is no single 'right' answer; we just want to see that you have thought about this issue.)
+Our application does not require the user themselves to enter in their data or create an account. Thus, the risk of user privacy breach is relatively low. We will also ensure that we will not track users as they use our application. In terms of the data we use in our application–the data we use is all open-source and public data/information. Although the data is already public and readily available throughout the internet, we will take care not to abuse or use the data for malicious purposes. Finally, we will also be transparent to our user in the way that we handle data.
