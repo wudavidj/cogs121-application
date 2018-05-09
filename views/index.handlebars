@@ -161,11 +161,11 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+            Compare
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Compare Players</a>
+            <a class="dropdown-item" href="#">Compare Teams</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
@@ -194,7 +194,7 @@
                   <li id="rank4"><a href="/players/DamianLillard">Damian Lillard</a></li>
                   <li id="rank5"><a href="/players/Stephen Curry">Stephen Curry</a></li>
                 </ol>
-                <button id="compareButton">Compare Players</button>
+                <button type="button" class="btn btn-warning">More Players</button>
               </div>
             </div>
           </div>
@@ -235,7 +235,7 @@
                     <div id="away5"></div>
                   </li>
                 </ol>
-                <button id="compareButton">Compare Players</button>
+                <button type="button" class="btn btn-warning">More Teams</button>
               </div>
             </div>
           </div>
@@ -246,13 +246,13 @@
               <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <ol type="1">
-                    <li id="rank1"><a href="/players/JamesHarden">James Harden</a></li>
-                    <li id="rank2"><a href="/players/AnthonyDavis">Anthony Davis</a></li>
-                    <li id="rank3"><a href="/players/GiannisAntetokounmpo">Giannis Antetokounmpo</a></li>
-                    <li id="rank4"><a href="/players/DamianLillard">Damian Lillard</a></li>
-                    <li id="rank5"><a href="/players/Stephen Curry">Stephen Curry</a></li>
+                    <li id="rank1">Lakers vs. Jets</li>
+                    <li id="rank2">Wizards vs. Clippers</li>
+                    <li id="rank3">Warriors vs. Cavaliers</li>
+                    <li id="rank4">Raptors vs. Pelicans</li>
+                    <li id="rank5">Nets vs. Knicks</li>
                   </ol>
-                  <button id="compareButton">Compare Players</button>
+                  <button type="button" class="btn btn-warning">More Games</button>
                 </div>
               </div>
             </div>
@@ -278,20 +278,29 @@
     <p>Hello</p>
 
   </div> -->
-  <div class="row">
-    <div class="two-section" id="left-double-section">
-      <h1>Game Locations</h1>
-      <div class="content-card" id="player-statistics">
 
-      </div>
-    </div>
-    <div class="two-section" id="right-double-section">
-      <h1>Trending</h1>
-      <div class="content-card" id="player-trending">
-      <a class="twitter-timeline" href="https://twitter.com/wojespn?ref_src=twsrc%5Etfw">Tweets by wojespn</a>
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Game Locations</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Trending</h5>
+        <a class="twitter-timeline" href="https://twitter.com/wojespn?ref_src=twsrc%5Etfw">Tweets by wojespn</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <hr/>
 
 
