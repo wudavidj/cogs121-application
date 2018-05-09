@@ -51,6 +51,7 @@ app.get('/players', (req,res) =>{
   });
 });
 
+console.log("aaded a test");
 //grab one players information
 app.get('/players/:playerName', (req,res) => {
 /*
