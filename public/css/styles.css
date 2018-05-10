@@ -1,28 +1,31 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700'); */
 
 body {
   background-color: #F1F5F8;
-  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
   margin-left: 80px;
   margin-right: 80px;
 }
 
 h1 {
-  font-size: 30px;
+  /*font-size: 30px;*/
   font-weight: 700;
   color: #ACACAC;
-  text-transform: uppercase;
+  margin-left: 80px;
+  padding-top: 24px;
+  /*text-transform: uppercase;*/
 }
 
 h2 {
-  font-size: 30px;
+  /*font-size: 30px;*/
   font-weight: 500;
   color: #000000;
   text-align: center;
+  margin-left: 24px;
 }
 
 h3 {
-  font-size: 20px;
+  /*font-size: 20px;*/
   font-weight: 700;
   color: #ACACAC;
   text-transform: uppercase;
@@ -37,7 +40,7 @@ h4 {
 }
 
 .data-label {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #ACACAC;
   text-transform: uppercase;
@@ -58,20 +61,23 @@ td {
   background-color: #FFFFFF;
   border-radius: 8px;
   padding: 60px;
+  margin-left: 80px;
+  margin-right: 80px;
   box-shadow: 0px 0px 4px #CCCCCC;
 }
 
 #player-detail {
-  height: 260px;
+  height: 320px;
   margin-bottom: 40px;
+
 }
 
 #player-statistics {
-  height: 600px;
+  height: 1000px;
 }
 
 #player-trending {
-  height: 600px;
+  height: 1000px;
 }
 
 .player-bio {
@@ -87,10 +93,9 @@ td {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  border-radius: 50%;
-  background-color: #ACACAC;
-  width: 160px;
-  height: 160px;
+
+  width: 120px;
+  height: 120px;
   margin-left: 60px;
   margin-right: 60px;
 }
@@ -98,7 +103,7 @@ td {
 .player-picture {
   width: auto;
   height: 100%;
-  margin-left: -30px;
+  margin-left: 30px;
 }
 
 .player-information {
@@ -115,10 +120,18 @@ td {
 }
 #left-double-section {
   float: left;
-  width: 600px;
+  width: 720px;
 }
 
 #right-double-section {
   float: right;
-  width: 600px;
+  width: 720px;
+}
+
+#compare {
+  width:250px;
+}
+
+.name-label {
+  font-size: 16px;
 }

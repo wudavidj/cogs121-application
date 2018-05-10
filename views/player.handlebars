@@ -2,18 +2,55 @@
 <html>
 <head>
   <title>Player</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link href="/css/styles.css" rel="stylesheet">
+ <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
   <script>
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
   </script>
 </head>
 <body>
-<a href="/">Home (will be a logo)</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">basket.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Compare
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Compare Players</a>
+              <a class="dropdown-item" href="#">Compare Teams</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
 <h1>Player Detail</h1>
 <div class="content-card" id="player-detail">
   <div class="player-bio">
     <div class="player-picture-wrapper">
-      <img class="player-picture" src="http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png&w=350&h=254"></img>
+      <img class="player-picture" src="https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/jamesle01.jpg"></img>
     </div>
     <h2>Lebron James</h2>
   </div>
@@ -41,34 +78,50 @@
     <div class="content-card" id="player-statistics">
       <table>
         <tr>
+          <td class="data-label"></td>
+          <td class="name-label" id="name1">Lebron James</td>
+          <td class="name-lable" id="name2">Kevin Durant</td>
+        </tr>
+        <tr>
           <td class="data-label">Field Goal %</td>
-          <td class="data-value" id="field-goal"></td>
+          <td class="data-value" id="field-goal1"></td>
+          <td class="data-value" id="field-goal2"></td>
         </tr>
         <tr>
           <td class="data-label">Free Throw %</td>
-          <td class="data-value" id="free-throw"></td>
+          <td class="data-value" id="free-throw1"></td>
+          <td class="data-value" id="free-throw2"></td>
         </tr>
         <tr>
           <td class="data-label">Assists per Game</td>
-          <td class="data-value" id="assists"></td>
+          <td class="data-value" id="assists1"></td>
+          <td class="data-value" id="assists2"></td>
         </tr>
         <tr>
           <td class="data-label">Steals per Game</td>
-          <td class="data-value" id="steals"></td>
+          <td class="data-value" id="steals1"></td>
+          <td class="data-value" id="steals2"></td>
         </tr>
         <tr>
           <td class="data-label">Blocks per Game</td>
-          <td class="data-value" id="blocks"></td>
+          <td class="data-value" id="blocks1"></td>
+          <td class="data-value" id="blocks2"></td>
         </tr>
         <tr>
           <td class="data-label">Points per Game</td>
-          <td class="data-value" id="points"></td>
+          <td class="data-value" id="points1"></td>
+          <td class="data-value" id="points2"></td>
         </tr>
         <tr>
           <td class="data-label">Minutes per Game</td>
-          <td class="data-value" id="minutes"></td>
+          <td class="data-value" id="minutes1"></td>
+          <td class="data-value" id="minutes2"></td>
         </tr>
       </table>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Add a Player to Compare" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
   </div>
   <div class="two-section" id="right-double-section">
