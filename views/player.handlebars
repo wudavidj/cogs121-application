@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Player</title>
-  <link href="/css/styles.css" rel="stylesheet">
+<title>Player</title>
+ <link href="/css/styles.css" rel="stylesheet">
  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-  <script>
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+<script>
+$(document).ready(() => {
+  $('#test-btn').click(() => {
+    const testSplit = $('#testing').val().split(' ');
+    const firstName = testSplit[0];
+    const lastName = testSplit[1];
+    const req = 'players/' + firstName + lastName;
+    const playerImg = lastName.substring(0,5).toLowerCase() + firstName.substring(0,2).toLowerCase() + "01.jpg";
+    const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
+    const twitterUrl = "https://twitter.com/hashtag/" + firstName + lastName;
+    $.ajax({
+      url: req,
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        $('#player-picture').attr('src',playerUrl + playerImg);
+        $('#player-twitter').attr('href', twitterUrl);
+        $('#player-twitter').html('#' + firstName + lastName + ' tweets');
+        $('#player-name').html(data.name);
+        $('#name1').html(data.name);
+        $('#player-team').html(data.team);
+        $('#player-position').html(data.position);
+        $('#field-goal1').html(data.fieldGoalPercent);
+        $('#free-throw1').html(data.freeThrowPercent);
+        $('#assists1').html(data.assist);
+        $('#steals1').html(data.steal);
+        $('#blocks1').html(data.block);
+        $('#points1').html(data.points);
+        $('#minutes1').html(data.minutesPlayed);
+      }, 
+    });
+  });
+
+
+  //COMPARE PLAYER BUTTON
+  $('#compare-btn').click(() => {
+    const cmpSplit = $('#compareSearch').val().split(' ');
+    const first = cmpSplit[0];
+    const last = cmpSplit[1];
+    const req = 'players/' + first + last;
+    const cpmImg = last.substring(0,5).toLowerCase() + first.substring(0,2).toLowerCase() + "01.jpg";
+    const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
+    $.ajax({
+      url: req,
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        $('#name2').html(data.name);
+        $('#field-goal2').html(data.fieldGoalPercent);
+        $('#free-throw2').html(data.freeThrowPercent);
+        $('#assists2').html(data.assist);
+        $('#steals2').html(data.steal);
+        $('#blocks2').html(data.block);
+        $('#points2').html(data.points);
+        $('#minutes2').html(data.minutesPlayed);
+      },
+    });
+  });
+}); 
+</script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,31 +107,26 @@
         </form>
       </div>
     </nav>
+
+<input id="testing" placeholder="Enter player name"></input>
+<button class="btn" id="test-btn">Search</button>
 <h1>Player Detail</h1>
 <div class="content-card" id="player-detail">
   <div class="player-bio">
     <div class="player-picture-wrapper">
-      <img class="player-picture" src="https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/jamesle01.jpg"></img>
+      <img id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
     </div>
-    <h2>Lebron James</h2>
+    <div>
+      <h2 id="player-name"></h2>
+    </div>
   </div>
   <div class="player-information" id="one">
     <h3>Position</h3>
-    <p>Small Forward</p>
-    <h3>Height</h3>
-    <p>6-6</p>
+    <p id="player-position"></p>
   </div>
   <div class="player-information" id="two">
-    <h3>Shoots</h3>
-    <p>Right</p>
-    <h3>Weight</h3>
-    <p>212 pounds</p>
-  </div>
-  <div class="player-information" id="three">
-    <h3>Born</h3>
-    <p>8/23/1978</p>
-    <h3>Country</h3>
-    <p>USA</p>
+    <h3>Team</h3>
+    <p id="player-team"></p>
   </div>
 </div>
   <div class="two-section" id="left-double-section">
@@ -79,8 +135,8 @@
       <table>
         <tr>
           <td class="data-label"></td>
-          <td class="name-label" id="name1">Lebron James</td>
-          <td class="name-lable" id="name2">Kevin Durant</td>
+          <td class="name-label" id="name1">Player 1</td>
+          <td class="name-lable" id="name2">Player 2</td>
         </tr>
         <tr>
           <td class="data-label">Field Goal %</td>
@@ -118,16 +174,16 @@
           <td class="data-value" id="minutes2"></td>
         </tr>
       </table>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Add a Player to Compare" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <div>
+        <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
+      </div>  
     </div>
   </div>
   <div class="two-section" id="right-double-section">
     <h1>Trending</h1>
     <div class="content-card" id="player-trending">
-      <a class="twitter-timeline" href="https://twitter.com/hashtag/LebronJames" data-widget-id="991223727323951104">#LebronJames Tweets</a>
+      <a class="twitter-timeline" id="player-twitter" href="https://twitter.com/hashtag/LebronJames" data-widget-id="991223727323951104"></a>
     </div>
   </div>
 </div>
