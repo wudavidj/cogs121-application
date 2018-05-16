@@ -6,9 +6,45 @@
  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-  <script>
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(() => {
+  $('#team-btn').click(() => {
+    const teamSearch = $('#teamFind').val() + '-2018.png';
+    const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
+    console.log(teamUrl + teamSearch);
+    console.log('/teams/' + $('#teamFind').val());
+    $('#roster').empty();
+    $.ajax({
+      url: '/teams/' + $('#teamFind').val().toUpperCase(),
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        $('#team-logo').attr('src', teamUrl + teamSearch);
+        $('#team-name').html(data.team);
+        $('#overall-record').html(data.overall);
+        $('#home-record').html(data.home);
+        $('#away-record').html(data.road);
+      },
+    });
+    $.ajax({
+      url:'/findTeam/' + $('#teamFind').val().toUpperCase(),
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        for(let x=0; x<data.length; x++){
+          console.log(data[x].name);
+          $('#roster').append($("<tr></tr>").text(data[x].name));
+        }
+      }
+    });
+
+
+  });
+
+});
+</script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -41,88 +77,34 @@
         </ul>
       </div>
     </nav>
+
+
+<input id="teamFind" placeholder="Enter team"></input>
+<button class="btn" id="team-btn">Search</button>
+
 <h1>Team Detail</h1>
-<div class="content-card" id="player-detail">
+<div class="content-card" id="team-detail">
   <div class="player-bio">
     <div class="player-picture-wrapper">
-      <img class="player-picture" src="https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/DAL.png"></img>
+      <img class="player-picture" id="team-logo" src="#"></img>
     </div>
-    <h2>Team Name</h2>
+    <h2 id="team-name"></h2>
   </div>
   <div class="player-information" id="one">
-    <h3>Position</h3>
-    <p>Small Forward</p>
-    <h3>Height</h3>
-    <p>6-6</p>
-  </div>
-  <div class="player-information" id="two">
-    <h3>Shoots</h3>
-    <p>Right</p>
-    <h3>Weight</h3>
-    <p>212 pounds</p>
-  </div>
-  <div class="player-information" id="three">
-    <h3>Born</h3>
-    <p>8/23/1978</p>
-    <h3>Country</h3>
-    <p>USA</p>
+    <h3>Overall Record</h3>
+    <p id="overall-record"></p>
+    <h3>Home</h3>
+    <p id="home-record"></p>
+    <h3>Away</h3>
+    <p id="away-record"></p>
   </div>
 </div>
   <div class="two-section" id="left-double-section">
-    <h1>2017-2018 Statistics</h1>
-    <div class="content-card" id="player-statistics">
-      <table>
-        <tr>
-          <td class="data-label"></td>
-          <td class="name-label" id="name1">Team A</td>
-          <td class="name-lable" id="name2">Compared Team</td>
-        </tr>
-        <tr>
-          <td class="data-label">A</td>
-          <td class="data-value" id="field-goal1"></td>
-          <td class="data-value" id="field-goal2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">B</td>
-          <td class="data-value" id="free-throw1"></td>
-          <td class="data-value" id="free-throw2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">C</td>
-          <td class="data-value" id="assists1"></td>
-          <td class="data-value" id="assists2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">D</td>
-          <td class="data-value" id="steals1"></td>
-          <td class="data-value" id="steals2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">E</td>
-          <td class="data-value" id="blocks1"></td>
-          <td class="data-value" id="blocks2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">F</td>
-          <td class="data-value" id="points1"></td>
-          <td class="data-value" id="points2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">G</td>
-          <td class="data-value" id="minutes1"></td>
-          <td class="data-value" id="minutes2"></td>
-        </tr>
+    <h1>2017-2018 Roster</h1>
+    <div class="content-card">
+      <table id="roster">
+        <tr id= "players"></tr>
       </table>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Add a Team to Compare" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-  <div class="two-section" id="right-double-section">
-    <h1>Trending</h1>
-    <div class="content-card" id="player-trending">
-      <a class="twitter-timeline" href="https://twitter.com/hashtag/LebronJames" data-widget-id="991223727323951104">#LebronJames Tweets</a>
     </div>
   </div>
 </div>

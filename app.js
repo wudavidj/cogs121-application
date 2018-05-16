@@ -52,12 +52,8 @@ app.get('/players', (req,res) =>{
   });
 });
 
-console.log("aaded a test");
 //grab one players information
 app.get('/players/:playerName', (req,res) => {
-/*
-TODO: WORK ON MIDDLE NAME AND SPLICING
-*/
 	const playerSearch = req.params.playerName;
   let first = playerSearch.charAt(0);
   let last = "";
@@ -85,10 +81,26 @@ TODO: WORK ON MIDDLE NAME AND SPLICING
     });
 });
 
+
+app.get('/findTeam/:teamName', (req, res) => {
+  const teamSearch = req.params.teamName;
+  console.log('TESTING: ' + teamSearch);
+  players.all(
+    'SELECT * FROM playerstable WHERE team = $team',
+    {$team: teamSearch},
+    (err, rows) => {
+      if(rows.length > 0){
+        console.log("it worked");
+        res.send(rows);
+      }else{
+        res.send({});
+      }
+    });
+});
+
 //gets all the teams
-//WORK ON LOOKING UP STRING WITH TEAM NAME NOT ABBREVIATION
 app.get('/teams', (req, res) => {
-  teams.all('SELECT team, overall, home, road FROM teamstable', (err, rows) =>{
+  teams.all('SELECT team, abv, overall, home, road FROM teamstable', (err, rows) =>{
     res.send(rows);
   });
 });
