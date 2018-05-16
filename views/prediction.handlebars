@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Player</title>
+<title>Prediction</title>
  <link href="/css/styles.css" rel="stylesheet">
  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -90,102 +90,76 @@ $(document).ready(() => {
             <a class="nav-link" href="/team">Teams</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/prediction">Predict</a>
+            <a class="nav-link" href="/team">Predict</a>
           </li>
         </ul>
       </div>
     </nav>
-
-<input id="testing" placeholder="Enter player name"></input>
-<button class="btn" id="test-btn">Search</button>
-<h1>Player Detail</h1>
+<h1>Game Predictions</h1>
 <div class="container">
   <div class="row">
     <div class="col">
-        <div class="card" style="width: 18rem;">
-          <span class="border border-warning"></span>
-          <div class="card-body">
-            <img id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
-          </div>
+      <div class="card">
+        <div class="card-body">
+          <table>
+            <tr>
+              <td><h4>Predictions for Top 10 Teams</h4></td>
+            </tr>
+            <tr>
+              <td id="team1A">Team 1</td>
+              <td>vs.</td>
+              <td id="team1B">Team 2</td>
+              <td id="prediction1">Prediction</td>
+            </tr>
+            <tr>
+              <td id="team2A">Team 1</td>
+              <td>vs.</td>
+              <td id="team2B">Team 2</td>
+              <td id="prediction2">Prediction</td>
+            </tr>
+            <tr>
+              <td id="team3A">Team 1</td>
+              <td>vs.</td>
+              <td id="team3B">Team 2</td>
+              <td id="prediction3">Prediction</td>
+            </tr>
+            <tr>
+              <td id="team4A">Team 1</td>
+              <td>vs.</td>
+              <td id="team4B">Team 2</td>
+              <td id="prediction4">Prediction</td>
+            </tr>
+            <tr>
+              <td id="team5A">Team 1</td>
+              <td>vs.</td>
+              <td id="team5B">Team 2</td>
+              <td id="prediction5">Prediction</td>
+            </tr>
+            <tr>
+              <td id="team6A">Team 1 (user input)</td>
+              <td>vs.</td>
+              <td id="team6B">Team 2 (user input)</td>
+              <td id="prediction6">Prediction (user input)</td>
+            </tr>
+            <tr>
+              <td>
+              <h4>Predict any game:</h4>
+            </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="form-control mr-sm-2" id="predictionTeam1"  placeholder="Team A" aria-label="Search">
+              </td>
+              <td></td>
+              <td>
+                <input class="form-control mr-sm-2" id="predictionTeam2"  placeholder="Team B" aria-label="Search">
+              </td>
+              <td>
+                <button class="btn btn-outline-success my-2 my-sm-0" id="prediction-btn">Predict</button>
+              </td>
         </div>
       </div>
-      <div class="col">
-          <div class="card" style="width: 18rem;">
-            <span class="border border-warning"></span>
-            <div class="card-body">
-                <h5>Position</h5>
-                <p id="player-position"></p>
-                <h5>Team</h5>
-                <p id="player-team"></p>
-                <h5>Social Media</h5>
-                <p id="player-social-media"></p>
-                <h5>Age</h5>
-                <p id="player-age"></p>
-                <h5>Height</h5>
-                <p id="player-height"></p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-
-
-  <div class="two-section" id="left-double-section">
-    <h1>2017-2018 Statistics</h1>
-    <div class="content-card" id="player-statistics">
-      <table>
-        <tr>
-          <td class="data-label"></td>
-          <td class="name-label" id="name1">Player 1</td>
-          <td class="name-lable" id="name2">Player 2</td>
-        </tr>
-        <tr>
-          <td class="data-label">Field Goal %</td>
-          <td class="data-value" id="field-goal1"></td>
-          <td class="data-value" id="field-goal2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Free Throw %</td>
-          <td class="data-value" id="free-throw1"></td>
-          <td class="data-value" id="free-throw2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Assists per Game</td>
-          <td class="data-value" id="assists1"></td>
-          <td class="data-value" id="assists2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Steals per Game</td>
-          <td class="data-value" id="steals1"></td>
-          <td class="data-value" id="steals2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Blocks per Game</td>
-          <td class="data-value" id="blocks1"></td>
-          <td class="data-value" id="blocks2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Points per Game</td>
-          <td class="data-value" id="points1"></td>
-          <td class="data-value" id="points2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Minutes per Game</td>
-          <td class="data-value" id="minutes1"></td>
-          <td class="data-value" id="minutes2"></td>
-        </tr>
-      </table>
-      <div>
-        <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
-      </div>
     </div>
-  </div>
-  <div class="two-section" id="right-double-section">
-    <h1>Trending</h1>
-    <div class="content-card" id="player-trending">
-      <a class="twitter-timeline" id="player-twitter" href="https://twitter.com/hashtag/LebronJames" data-widget-id="991223727323951104"></a>
-    </div>
-  </div>
 </div>
 </body>

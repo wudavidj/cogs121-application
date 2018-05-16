@@ -107,8 +107,7 @@ td {
 }
 
 .player-information {
-  float: left;
-  width: 220px;
+
 }
 
 #one {
@@ -120,12 +119,12 @@ td {
 }
 #left-double-section {
   float: left;
-  width: 720px;
+  width: 700px;
 }
 
 #right-double-section {
   float: right;
-  width: 720px;
+  width: 700px;
 }
 
 #compare {
