@@ -6,9 +6,45 @@
  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-  <script>
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(() => {
+  $('#team-btn').click(() => {
+    const teamSearch = $('#teamFind').val() + '-2018.png';
+    const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
+    console.log(teamUrl + teamSearch);
+    console.log('/teams/' + $('#teamFind').val());
+    $('#roster').empty();
+    $.ajax({
+      url: '/teams/' + $('#teamFind').val().toUpperCase(),
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        $('#team-logo').attr('src', teamUrl + teamSearch);
+        $('#team-name').html(data.team);
+        $('#overall-record').html(data.overall);
+        $('#home-record').html(data.home);
+        $('#away-record').html(data.road);
+      },
+    });
+    $.ajax({
+      url:'/findTeam/' + $('#teamFind').val().toUpperCase(),
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        for(let x=0; x<data.length; x++){
+          console.log(data[x].name);
+          $('#roster').append($("<tr></tr>").text(data[x].name));
+        }
+      }
+    });
+
+
+  });
+
+});
+</script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,112 +53,59 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+
           <li class="nav-item">
-            <a class="nav-link" href="/player">Players</a>
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Compare
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/player">Compare Players</a>
+              <a class="dropdown-item" href="/team">Compare Teams</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/team">Teams</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/prediction">Predict</a>
+            <a class="nav-link disabled" href="#">Disabled</a>
           </li>
         </ul>
       </div>
     </nav>
-    <div style="text-align: center">
-    <input id="testing" placeholder="Find a Team" style="width: 80%; margin-top: 16px; height: 48px"></input>
-    <button class="btn" id="test-btn">Search</button>
-    </div>
+
+
+<input id="teamFind" placeholder="Enter team"></input>
+<button class="btn" id="team-btn">Search</button>
+
 <h1>Team Detail</h1>
-<div class="container">
-  <div class="row">
-    <div class="col">
-        <div class="card">
-          <span class="border border-warning"></span>
-          <div class="card-body">
-            <h2 id="player-name" style="margin-bottom: 75px"></h2>
-            <img id="team-picture" src='https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/CHA.png'></img>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-          <div class="card">
-            <span class="border border-warning"></span>
-            <div class="card-body">
-                <h5>Team Attribute 1</h5>
-                <p id="1"></p>
-                <h5>Team Attribute 2</h5>
-                <p id="2"></p>
-                <h5>Team Attribute 3</h5>
-                <p id="3"></p>
-                <h5>Team Attribute 4</h5>
-                <p id="4"></p>
-                <h5>Team Attribute 5</h5>
-                <p id="5"></p>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="content-card" id="team-detail">
+  <div class="player-bio">
+    <div class="player-picture-wrapper">
+      <img class="player-picture" id="team-logo" src="#"></img>
     </div>
-    <div class="container">
-    <div class="row">
-    <div class="col" style="margin-top: 40px">
-      <div class="card">
-          <span class="border border-warning"></span>
-        <div class="card-body">
-          <table>
-            <tr>
-              <td class="data-label"></td>
-              <td class="name-label" id="name1">Team A</td>
-              <td class="name-lable" id="name2">Compared Team</td>
-            </tr>
-            <tr>
-              <td class="data-label">A</td>
-              <td class="data-value" id="field-goal1"></td>
-              <td class="data-value" id="field-goal2"></td>
-            </tr>
-            <tr>
-              <td class="data-label">B</td>
-              <td class="data-value" id="free-throw1"></td>
-              <td class="data-value" id="free-throw2"></td>
-            </tr>
-            <tr>
-              <td class="data-label">C</td>
-              <td class="data-value" id="assists1"></td>
-              <td class="data-value" id="assists2"></td>
-            </tr>
-            <tr>
-              <td class="data-label">D</td>
-              <td class="data-value" id="steals1"></td>
-              <td class="data-value" id="steals2"></td>
-            </tr>
-            <tr>
-              <td class="data-label">E</td>
-              <td class="data-value" id="blocks1"></td>
-              <td class="data-value" id="blocks2"></td>
-            </tr>
-            <tr>
-              <td class="data-label">F</td>
-              <td class="data-value" id="points1"></td>
-              <td class="data-value" id="points2"></td>
-            </tr>
-            <tr>
-              <td class="data-label">G</td>
-              <td class="data-value" id="minutes1"></td>
-              <td class="data-value" id="minutes2"></td>
-            </tr>
-          </table>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Add a Team to Compare" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
+    <h2 id="team-name"></h2>
+  </div>
+  <div class="player-information" id="one">
+    <h3>Overall Record</h3>
+    <p id="overall-record"></p>
+    <h3>Home</h3>
+    <p id="home-record"></p>
+    <h3>Away</h3>
+    <p id="away-record"></p>
+  </div>
+</div>
+  <div class="two-section" id="left-double-section">
+    <h1>2017-2018 Roster</h1>
+    <div class="content-card">
+      <table id="roster">
+        <tr id= "players"></tr>
+      </table>
     </div>
   </div>
 </div>
-    </div>
-  </div>
 </body>
