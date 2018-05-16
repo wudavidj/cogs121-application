@@ -12,59 +12,22 @@
 </script>
 <script>
 $(document).ready(() => {
-  $('#test-btn').click(() => {
-    const testSplit = $('#testing').val().split(' ');
-    const firstName = testSplit[0];
-    const lastName = testSplit[1];
-    const req = 'players/' + firstName + lastName;
-    const playerImg = lastName.substring(0,5).toLowerCase() + firstName.substring(0,2).toLowerCase() + "01.jpg";
-    const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
-    const twitterUrl = "https://twitter.com/hashtag/" + firstName + lastName;
+  $('#prediction-btn').click(() => {
+    const firstTeam = $('#predictionTeam1').val();
+    const secondTeam = $('#predictionTeam2').val();
+
     $.ajax({
-      url: req,
+      url: 'teams/' + firstTeam,
       type: 'GET',
       dataType: 'json',
       success: (data) => {
-        $('#player-picture').attr('src',playerUrl + playerImg);
-        $('#player-twitter').attr('href', twitterUrl);
-        $('#player-twitter').html('#' + firstName + lastName + ' tweets');
-        $('#player-name').html(data.name);
-        $('#name1').html(data.name);
-        $('#player-team').html(data.team);
-        $('#player-position').html(data.position);
-        $('#field-goal1').html(data.fieldGoalPercent);
-        $('#free-throw1').html(data.freeThrowPercent);
-        $('#assists1').html(data.assist);
-        $('#steals1').html(data.steal);
-        $('#blocks1').html(data.block);
-        $('#points1').html(data.points);
-        $('#minutes1').html(data.minutesPlayed);
-      },
-    });
-  });
-
-
-  //COMPARE PLAYER BUTTON
-  $('#compare-btn').click(() => {
-    const cmpSplit = $('#compareSearch').val().split(' ');
-    const first = cmpSplit[0];
-    const last = cmpSplit[1];
-    const req = 'players/' + first + last;
-    const cpmImg = last.substring(0,5).toLowerCase() + first.substring(0,2).toLowerCase() + "01.jpg";
-    const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
-    $.ajax({
-      url: req,
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        $('#name2').html(data.name);
-        $('#field-goal2').html(data.fieldGoalPercent);
-        $('#free-throw2').html(data.freeThrowPercent);
-        $('#assists2').html(data.assist);
-        $('#steals2').html(data.steal);
-        $('#blocks2').html(data.block);
-        $('#points2').html(data.points);
-        $('#minutes2').html(data.minutesPlayed);
+        console.log(data);
+        const record = data[secondTeam].split('-');
+        const first = Number(record[0]);
+        const second = Number(record[1]);
+        const prob = Math.round((first / (first + second)) * 100);
+        console.log("Probability: " + prob);
+        $('#predictions').append("<tr><td>" + firstTeam + "</td>" + "<td>vs.</td>" + "<td>" + secondTeam + "<td>Probability of " + firstTeam + " winning: <b>" + prob + "%</b></td>");
       },
     });
   });
@@ -97,59 +60,55 @@ $(document).ready(() => {
   <div class="row">
     <div class="col">
       <div class="card">
-          <span class="border border-warning"></span>
+        <span class="border border-warning"></span>
         <div class="card-body">
+            <h4>Predictions for Top 10 Teams</h4>
           <table>
             <tr>
-              <td><h4>Predictions for Top 10 Teams</h4></td>
+              <td><h2>EAST<h2></td>
+              <td></td>
+              <td><h2>WEST</h2></td>
             </tr>
             <tr>
-              <td id="team1A">Team 1</td>
+              <td id="team1A">HOU</td>
               <td>vs.</td>
-              <td id="team1B">Team 2</td>
-              <td id="prediction1">Prediction</td>
+              <td id="team1B">TOR</td>
+              <td id="prediction1">Probability of HOU winning: <b>75%</b></td>
             </tr>
             <tr>
-              <td id="team2A">Team 1</td>
+              <td id="team2A">GSW</td>
               <td>vs.</td>
-              <td id="team2B">Team 2</td>
-              <td id="prediction2">Prediction</td>
+              <td id="team2B">BOS</td>
+              <td id="prediction2">Probability of GSW winning: <b>83%</b></td>
             </tr>
             <tr>
-              <td id="team3A">Team 1</td>
+              <td id="team3A">POR</td>
               <td>vs.</td>
-              <td id="team3B">Team 2</td>
-              <td id="prediction3">Prediction</td>
+              <td id="team3B">PHI</td>
+              <td id="prediction3">Probability of PHI winning: <b>55%</b></td>
             </tr>
             <tr>
-              <td id="team4A">Team 1</td>
+              <td id="team4A">OKC</td>
               <td>vs.</td>
-              <td id="team4B">Team 2</td>
-              <td id="prediction4">Prediction</td>
+              <td id="team4B">CLE</td>
+              <td id="prediction4">Probability of CLE winning: <b>70%</b></td>
             </tr>
             <tr>
-              <td id="team5A">Team 1</td>
+              <td id="team5A">UTA</td>
               <td>vs.</td>
-              <td id="team5B">Team 2</td>
-              <td id="prediction5">Prediction</td>
+              <td id="team5B">IND</td>
+              <td id="prediction5">Probability of IND winning: <b>51%</b></td>
             </tr>
-            <tr>
-              <td id="team6A">Team 1 (user input)</td>
-              <td>vs.</td>
-              <td id="team6B">Team 2 (user input)</td>
-              <td id="prediction6">Prediction (user input)</td>
-            </tr>
-            <tr>
             </table>
-              <td>
+            <td><h4>Your Own Predictions</h4></td>
+            <td>
               <h4>Predict any game:</h4>
-            </td>
-            </tr>
+            <table id="predictions">
+            </table>
             <tr>
               <td>
                 <input class="form-control mr-sm-2" id="predictionTeam1"  placeholder="Team A" aria-label="Search">
               </td>
-              <td></td>
               <td>
                 <input class="form-control mr-sm-2" id="predictionTeam2"  placeholder="Team B" aria-label="Search">
               </td>
