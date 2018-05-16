@@ -92,7 +92,6 @@ td {
 .player-picture-wrapper {
   display: inline-block;
   position: relative;
-  overflow: hidden;
 
   width: 120px;
   height: 120px;
