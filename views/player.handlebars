@@ -39,7 +39,10 @@ $(document).ready(() => {
         $('#blocks1').html(data.block);
         $('#points1').html(data.points);
         $('#minutes1').html(data.minutesPlayed);
+<<<<<<< HEAD
       }, 
+=======
+>>>>>>> 1dee14ff0b3a63963d86e7c05e9fbbb64e9a5714
       },
     });
   });
@@ -58,6 +61,7 @@ $(document).ready(() => {
       type: 'GET',
       dataType: 'json',
       success: (data) => {
+        $('#player-name').html(data.name);
         $('#name2').html(data.name);
         $('#field-goal2').html(data.fieldGoalPercent);
         $('#free-throw2').html(data.freeThrowPercent);
@@ -69,7 +73,10 @@ $(document).ready(() => {
       },
     });
   });
+<<<<<<< HEAD
 }); 
+=======
+>>>>>>> 1dee14ff0b3a63963d86e7c05e9fbbb64e9a5714
 });
 </script>
 </head>
@@ -83,9 +90,6 @@ $(document).ready(() => {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="/player">Players</a>
           </li>
           <li class="nav-item">
@@ -97,9 +101,10 @@ $(document).ready(() => {
         </ul>
       </div>
     </nav>
-
-<input id="testing" placeholder="Enter player name"></input>
+<div style="text-align: center">
+<input id="testing" placeholder="Find a Player" style="width: 80%; margin-top: 16px; height: 48px"></input>
 <button class="btn" id="test-btn">Search</button>
+<<<<<<< HEAD
 <h1>Player Detail</h1>
 <div class="content-card" id="player-detail">
   <div class="player-bio">
@@ -119,12 +124,17 @@ $(document).ready(() => {
     <p id="player-team"></p>
   </div>
 </div>
+=======
+</div>
+<h1>Player Detail</h1>
+>>>>>>> 1dee14ff0b3a63963d86e7c05e9fbbb64e9a5714
 <div class="container">
   <div class="row">
     <div class="col">
         <div class="card" style="width: 18rem;">
           <span class="border border-warning"></span>
           <div class="card-body">
+            <h2 id="player-name" style="margin-bottom: 70px"></h2>
             <img id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
           </div>
         </div>
@@ -148,6 +158,7 @@ $(document).ready(() => {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 
   <div class="two-section" id="left-double-section">
     <h1>2017-2018 Statistics</h1>
@@ -198,14 +209,63 @@ $(document).ready(() => {
         <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
       </div>  
+=======
+    <div class="container">
+      <div class="row">
+        <div class="col" style="margin-top: 40px">
+          <div class="card">
+              <span class="border border-warning"></span>
+            <div class="card-body">
+              <table>
+                <tr>
+                  <td class="data-label"></td>
+                  <td class="name-label" id="name1">Player 1</td>
+                  <td class="name-lable" id="name2">Player 2</td>
+                </tr>
+                <tr>
+                  <td class="data-label">Field Goal %</td>
+                  <td class="data-value" id="field-goal1"></td>
+                  <td class="data-value" id="field-goal2"></td>
+                </tr>
+                <tr>
+                  <td class="data-label">Free Throw %</td>
+                  <td class="data-value" id="free-throw1"></td>
+                  <td class="data-value" id="free-throw2"></td>
+                </tr>
+                <tr>
+                  <td class="data-label">Assists per Game</td>
+                  <td class="data-value" id="assists1"></td>
+                  <td class="data-value" id="assists2"></td>
+                </tr>
+                <tr>
+                  <td class="data-label">Steals per Game</td>
+                  <td class="data-value" id="steals1"></td>
+                  <td class="data-value" id="steals2"></td>
+                </tr>
+                <tr>
+                  <td class="data-label">Blocks per Game</td>
+                  <td class="data-value" id="blocks1"></td>
+                  <td class="data-value" id="blocks2"></td>
+                </tr>
+                <tr>
+                  <td class="data-label">Points per Game</td>
+                  <td class="data-value" id="points1"></td>
+                  <td class="data-value" id="points2"></td>
+                </tr>
+                <tr>
+                  <td class="data-label">Minutes per Game</td>
+                  <td class="data-value" id="minutes1"></td>
+                  <td class="data-value" id="minutes2"></td>
+                </tr>
+              </table>
+              <div>
+                <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+>>>>>>> 1dee14ff0b3a63963d86e7c05e9fbbb64e9a5714
       </div>
     </div>
-  </div>
-  <div class="two-section" id="right-double-section">
-    <h1>Trending</h1>
-    <div class="content-card" id="player-trending">
-      <a class="twitter-timeline" id="player-twitter" href="https://twitter.com/hashtag/LebronJames" data-widget-id="991223727323951104"></a>
-    </div>
-  </div>
-</div>
 </body>
