@@ -35,10 +35,19 @@ $(document).ready(() => {
       success: (data) => {
         for(let x=0; x<data.length; x++){
           console.log(data[x].name);
+<<<<<<< HEAD
           $('#roster').append($("<li></li>").text(data[x].name));
         }
       }
     });
+=======
+          $('#roster').append($("<tr></tr>").text(data[x].name));
+        }
+      }
+    });
+
+
+>>>>>>> e1c2996153999f5a6d26584a11be3682ed0f9d58
   });
 
 });
@@ -101,7 +110,11 @@ $(document).ready(() => {
     <h1>2017-2018 Roster</h1>
     <div class="content-card">
       <table id="roster">
+<<<<<<< HEAD
         <ol id= "players"></ol>
+=======
+        <tr id= "players"></tr>
+>>>>>>> e1c2996153999f5a6d26584a11be3682ed0f9d58
       </table>
     </div>
   </div>
