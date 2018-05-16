@@ -12,6 +12,11 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script>
       $(document).ready(() => {
+
+        $('#more-players').click(() => {
+          $('#rank5').append("<li id='rank6'><a href='/players/Kevin Durant'>Kevin Durant</a></li><li id='rank7'><a href='/players/Russell Westbrook'>Russell Westbrook</a></li><li id='rank8'><a href='/players/DeMarcus Cousins'>DeMarcus Cousins</a></li><li id='rank9'><a href='/players/Devin Booker'>Devin Booker</a></li><li id='rank10'><a href='/players/Kyrie Irving'>Kyrie Irving</a></li>");
+        });
+
         $('#searchButton').click(() => {
           const reqUrl = 'players/' + $('#nameBox').val();
           /*
@@ -167,8 +172,8 @@
         </nav>
 
         <div class="container">
-          <div class="row">
-            <div class="col">
+          <div class="row" style="margin-top: 16px">
+            <div class="col" style="margin-bottom: 32px">
                 <h1>Rankings</h1>
                 <div class="card" style="width: 18rem;">
                   <span class="border border-warning"></span>
@@ -222,7 +227,7 @@
                         <div id="away5"></div>
                       </li>
                     </ol>
-                    <button type="button" class="btn btn-warning"><a href="/team">More Teams</a></button>
+                    <!--<button type="button" class="btn btn-warning"><a href="/team">More Teams</a></button>-->
                   </div>
                 </div>
               </div>
@@ -240,7 +245,7 @@
                         <li id="rank4">Raptors vs. Pelicans</li>
                         <li id="rank5">Nets vs. Knicks</li>
                       </ol>
-                      <button type="button" class="btn btn-warning">More Games</button>
+                      <!--<button type="button" class="btn btn-warning">More Games</button>-->
                     </div>
                   </div>
                 </div>
@@ -248,7 +253,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-left:16px; margin-right:16px">
           <div class="col-sm-6">
           <div class="card">
               <span class="border border-warning"></span>
