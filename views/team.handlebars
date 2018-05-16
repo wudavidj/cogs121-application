@@ -35,7 +35,7 @@ $(document).ready(() => {
       success: (data) => {
         for(let x=0; x<data.length; x++){
           console.log(data[x].name);
-          $('#roster').append($("<tr></tr>").text(data[x].name));
+          $('#roster').append($("<li></li>").text(data[x].name));
         }
       }
     });
@@ -101,7 +101,7 @@ $(document).ready(() => {
     <h1>2017-2018 Roster</h1>
     <div class="content-card">
       <table id="roster">
-        <tr id= "players"></tr>
+        <ol id= "players"></ol>
       </table>
     </div>
   </div>
