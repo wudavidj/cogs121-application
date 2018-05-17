@@ -100,7 +100,7 @@ $(document).ready(() => {
 <div class="content-card" id="player-detail">
   <div class="player-bio">
     <div class="player-picture-wrapper">
-      <img id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
+      <img style="height: 100%; width: auto;" id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
     </div>
     <div>
       <h2 id="player-name"></h2>
@@ -149,55 +149,44 @@ $(document).ready(() => {
       </div>
     </div>
 -->
-  <div class="two-section" id="left-double-section">
-    <h1>2017-2018 Statistics</h1>
-    <div class="content-card" id="player-statistics">
-      <table>
-        <tr>
-          <td class="data-label"></td>
-          <td class="name-label" id="name1">Player 1</td>
-          <td class="name-lable" id="name2">Player 2</td>
-        </tr>
-        <tr>
-          <td class="data-label">Field Goal %</td>
-          <td class="data-value" id="field-goal1"></td>
-          <td class="data-value" id="field-goal2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Free Throw %</td>
-          <td class="data-value" id="free-throw1"></td>
-          <td class="data-value" id="free-throw2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Assists per Game</td>
-          <td class="data-value" id="assists1"></td>
-          <td class="data-value" id="assists2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Steals per Game</td>
-          <td class="data-value" id="steals1"></td>
-          <td class="data-value" id="steals2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Blocks per Game</td>
-          <td class="data-value" id="blocks1"></td>
-          <td class="data-value" id="blocks2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Points per Game</td>
-          <td class="data-value" id="points1"></td>
-          <td class="data-value" id="points2"></td>
-        </tr>
-        <tr>
-          <td class="data-label">Minutes per Game</td>
-          <td class="data-value" id="minutes1"></td>
-          <td class="data-value" id="minutes2"></td>
-        </tr>
-      </table>
-      <div>
-        <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
-      </div>
+  <h1>2017-2018 Statistics</h1>
+
+  <div class="content-card" id="player-statistics" style="overflow-x: scroll;">
+    <table>
+      <tr>
+        <td></td>
+        <td class="data-label">Field Goal %</td>
+        <td class="data-label">Free Throw %</td>
+        <td class="data-label">Assists per Game</td>
+        <td class="data-label">Steals per Game</td>
+        <td class="data-label">Blocks per Game</td>
+        <td class="data-label">Points per Game</td>
+        <td class="data-label">Minutes per Game</td>
+      </tr>
+      <tr>
+        <td class="name-label" id="name1">Player 1</td>
+        <td class="data-value" id="field-goal1"></td>
+        <td class="data-value" id="free-throw1"></td>
+        <td class="data-value" id="assists1"></td>
+        <td class="data-value" id="steals1"></td>
+        <td class="data-value" id="blocks1"></td>
+        <td class="data-value" id="points1"></td>
+        <td class="data-value" id="minutes1"></td>
+      </tr>
+      <tr>
+        <td class="name-lable" id="name2">Player 2</td>
+        <td class="data-value" id="field-goal2"></td>
+        <td class="data-value" id="free-throw2"></td>
+        <td class="data-value" id="assists2"></td>
+        <td class="data-value" id="steals2"></td>
+        <td class="data-value" id="blocks2"></td>
+        <td class="data-value" id="points2"></td>
+        <td class="data-value" id="minutes2"></td>
+      </tr>
+    </table>
+    <div>
+      <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
     </div>
   </div>
   <!--
