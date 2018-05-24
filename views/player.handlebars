@@ -25,10 +25,12 @@ $(document).ready(() => {
       type: 'GET',
       dataType: 'json',
       success: (data) => {
+        console.log(data);
         $('#player-picture').attr('src',playerUrl + playerImg);
         $('#player-twitter').attr('href', twitterUrl);
         $('#player-twitter').html('#' + firstName + lastName + ' tweets');
         $('#player-name').html(data.name);
+        $('#player-age').html(data.age);
         $('#name1').html(data.name);
         $('#player-team').html(data.team);
         $('#player-position').html(data.position);
@@ -107,12 +109,12 @@ $(document).ready(() => {
     </div>
   </div>
   <div class="player-information" id="one">
-    <h3>Position</h3>
+    <p>Position</p>
     <p id="player-position"></p>
-  </div>
-  <div class="player-information" id="two">
-    <h3>Team</h3>
+    <p>Team</p>
     <p id="player-team"></p>
+    <p>Age</p>
+    <p id="player-age"></p>
   </div>
 </div>
 </div>
