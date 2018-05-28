@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Player</title>
- <link href="/css/styles.css" rel="stylesheet">
- <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
+<link href="/css/styles.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
@@ -250,4 +251,26 @@ $(document).ready(() => {
       </div>
     </div>
   -->
+<div>
+  <h1>Players Field Goal Percentage Per Quarter</h1>
+  <div class="container" id="chart1">
+  </div>
+</div>
+<script>
+  //FAKE DATA FOR NOW
+  const quarter = {first: '.456', second: '.425', third: '.500', fourth: '.444'};
+  const timeLeft = {greaterThan: '.502', between: '.573', lessThan:'.554'};
+  var data = [
+  {
+    z:[[Number(quarter.first) + Number(timeLeft.lessThan) / 2, Number(quarter.second) + Number(timeLeft.lessThan) / 2, Number(quarter.third) + Number(timeLeft.lessThan) / 2, Number(quarter.fourth) + Number(timeLeft.lessThan) / 2],
+      [Number(quarter.first) + Number(timeLeft.between) / 2, Number(quarter.second) + Number(timeLeft.between) / 2, Number(quarter.third) + Number(timeLeft.between) / 2, Number(quarter.fourth) + Number(timeLeft.between) / 2],
+      [Number(quarter.first) + Number(timeLeft.greaterThan) / 2, Number(quarter.second) + Number(timeLeft.greaterThan) / 2, Number(quarter.third) + Number(timeLeft.greaterThan) / 2, Number(quarter.fourth) + Number(timeLeft.greaterThan) / 2]],
+    x: ['First', 'Second', 'Third', 'Fourth'],
+    y: ['< 3 Minutes', '3-6 Minutes', '> 6 Minutes'],
+    type: 'heatmap'
+  }
+  ];
+  Plotly.newPlot('chart1', data);
+</script>
 </body>
+</html>
