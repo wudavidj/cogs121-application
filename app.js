@@ -23,6 +23,8 @@ const players = new sqlite3.Database('players.db');
 const teams = new sqlite3.Database('teams.db');
 const games = new sqlite3.Database('games.db');
 
+const request = require('request');
+const cheerio = require('cheerio');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -39,6 +41,22 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/scrape', (req, res) =>{
+  const url = 'https://www.basketball-reference.com/players/j/jamesle01/shooting/2018';
+  res.send({});
+  request(url, (error, res, html) => {
+    if(!error){
+      const $ = cheerio.load(html);
+      const first = null;
+      const second = null;
+      const third = null;
+      const fourth = null;
+      const json = {first: "", second:"", third:"",fourth:""};
+      console.log($);
+    }
+  })
+});
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -46,7 +64,6 @@ if ('development' == app.get('env')) {
 
 //Show all players to the screen
 app.get('/players', (req,res) =>{
-	console.log("get request is working");
 	players.all('SELECT * FROM playerstable', (err, rows) => {
     res.send(rows);
   });
