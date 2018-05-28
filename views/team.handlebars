@@ -7,7 +7,9 @@
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script type="text/javascript"> // load the visualisation API
+  google.load('visualization', '1', { packages: ['corechart', 'controls'] });
+</script>
 <script>
 $(document).ready(() => {
   $('#team-btn').click(() => {
@@ -42,6 +44,28 @@ $(document).ready(() => {
   });
 
 });
+function drawVisualization() {
+   $.get("../teamRatios.csv", function(csvString) {
+      // transform the CSV string into a 2-dimensional array
+      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+
+      // this new DataTable object holds all the data
+      var data = new google.visualization.arrayToDataTable(arrayData);
+      // CAPACITY - En-route ATFM delay - YY - CHART
+      var graph = new google.visualization.ChartWrapper({
+         chartType: 'LineChart',
+         containerId: 'graph',
+         dataTable: data,
+         options:{
+            width: 450, height: 160,
+            title: 'LINE CHART',
+            titleTextStyle : {color: 'grey', fontSize: 11},
+         }
+      });
+      graph.draw();
+   });
+}
+google.setOnLoadCallback(drawVisualization)
 </script>
 </head>
 <body>
@@ -94,5 +118,5 @@ $(document).ready(() => {
       </ol>
     </div>
   </div>
-</div>
+<div id="graph"></div>
 </body>
