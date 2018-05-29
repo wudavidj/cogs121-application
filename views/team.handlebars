@@ -7,9 +7,8 @@
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"> // load the visualisation API
-  google.load('visualization', '1', { packages: ['corechart', 'controls'] });
-</script>
+<!-- Plotly.js -->
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
 $(document).ready(() => {
   $('#team-btn').click(() => {
@@ -44,28 +43,69 @@ $(document).ready(() => {
   });
 
 });
-function drawVisualization() {
-   $.get("../teamRatios.csv", function(csvString) {
-      // transform the CSV string into a 2-dimensional array
-      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
 
-      // this new DataTable object holds all the data
-      var data = new google.visualization.arrayToDataTable(arrayData);
-      // CAPACITY - En-route ATFM delay - YY - CHART
-      var graph = new google.visualization.ChartWrapper({
-         chartType: 'LineChart',
-         containerId: 'graph',
-         dataTable: data,
-         options:{
-            width: 450, height: 160,
-            title: 'LINE CHART',
-            titleTextStyle : {color: 'grey', fontSize: 11},
-         }
-      });
-      graph.draw();
-   });
+function makeplot() {
+ 	Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv", function(data){ processData(data) } );
+
+};
+
+function processData(allRows) {
+
+	console.log(allRows);
+	var x = [], y = [], standard_deviation = [];
+  const teamName = $('#teamFind').val();
+  console.log(teamName);
+  var rowNum = allRows.length;
+  console.log(rowNum);
+  var numLoops = Math.ceil(rowNum/20);
+  console.log(numLoops);
+
+  for (var i=0; i<numLoops; i++) {
+    var winCount = 0;
+    var loseCount = 0;
+    var total = 0;
+    for (var j=(20*i); j<(20*(i+1)); j++) {
+      row = allRows[j];
+      console.log(row);
+      if (row[Winner] == teamName) {
+        winCount++;
+        total++;
+      }
+      if (row[Loser] == teamName) {
+        loseCount++;
+        total++;
+      }
+    }
+    x.push(i);
+    y.push(winCount/total);
+  }
+
+/*
+	for (var i=0; i<allRows.length; i++) {
+    for (var i*)
+    xNum = 0;
+    yNum = 0;
+		row = allRows[i];
+		x.push(xNum);
+		y.push( row['AAPL_y'] );
+    x++;
+	}
+  */
+	console.log( 'X',x, 'Y',y, 'SD',standard_deviation );
+	makePlotly( x, y, standard_deviation );
 }
-google.setOnLoadCallback(drawVisualization)
+
+function makePlotly( x, y, standard_deviation ){
+	var plotDiv = document.getElementById("plot");
+	var traces = [{
+		x: x,
+		y: y
+	}];
+
+	Plotly.newPlot('myDiv', traces,
+		{title: 'Plotting CSV data from AJAX call'});
+};
+  makeplot();
 </script>
 </head>
 <body>
@@ -118,5 +158,5 @@ google.setOnLoadCallback(drawVisualization)
       </ol>
     </div>
   </div>
-<div id="graph"></div>
+<div id="myDiv"></div>
 </body>
