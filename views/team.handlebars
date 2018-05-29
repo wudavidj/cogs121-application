@@ -3,109 +3,97 @@
 <head>
   <title>Team</title>
   <link href="/css/styles.css" rel="stylesheet">
- <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Plotly.js -->
-   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script>
-$(document).ready(() => {
-  $('#team-btn').click(() => {
-    const teamSearch = $('#teamFind').val() + '-2018.png';
-    const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
-    console.log(teamUrl + teamSearch);
-    console.log('/teams/' + $('#teamFind').val());
-    $('#roster').empty();
-    $.ajax({
-      url: '/teams/' + $('#teamFind').val().toUpperCase(),
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        $('#team-logo').attr('src', teamUrl + teamSearch);
-        $('#team-name').html(data.team);
-        $('#overall-record').html(data.overall);
-        $('#home-record').html(data.home);
-        $('#away-record').html(data.road);
-      },
-    });
-    $.ajax({
-      url:'/findTeam/' + $('#teamFind').val().toUpperCase(),
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        for(let x=0; x<data.length; x++){
-          console.log(data[x].name);
-          $('#roster').append($("<li></li>").text( data[x].name));
+  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+  $(document).ready(() => {
+    $('#team-btn').click(() => {
+      const teamSearch = $('#teamFind').val() + '-2018.png';
+      const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
+      //console.log(teamUrl + teamSearch);
+      //console.log('/teams/' + $('#teamFind').val());
+      $('#roster').empty();
+      $.ajax({
+        url: '/teams/' + $('#teamFind').val().toUpperCase(),
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          $('#team-logo').attr('src', teamUrl + teamSearch);
+          $('#team-name').html(data.team);
+          $('#overall-record').html(data.overall);
+          $('#home-record').html(data.home);
+          $('#away-record').html(data.road);
+        },
+      });
+      $.ajax({
+        url:'/findTeam/' + $('#teamFind').val().toUpperCase(),
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          for(let x=0; x<data.length; x++){
+            //console.log(data[x].name);
+            $('#roster').append($("<li></li>").text( data[x].name));
+          }
         }
+      });
+
+      // data visualization function makeplot()
+      function makeplot() {
+        // calls processData()
+        Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
+      };
+
+      // data visualization function processData()
+      function processData(allRows) {
+        var x = [], y = [], standard_deviation = [];
+        // obtain team name
+        const teamName = $('#teamFind').val();
+        var rowNum = allRows.length;
+        var numLoops = Math.ceil(rowNum/20);
+        var winCount = 0;
+        var total = 0;
+        // loop through game history
+        for (var i=0; i<numLoops; i++) {
+          for (var j=(20*i); j<(20*(i+1)); j++) {
+            if (j < allRows.length) {
+              row = allRows[j];
+              winnerName = row['Winner'];
+              loserName = row['Loser'];
+              // builds graph data
+              if (winnerName == teamName) {
+                winCount++;
+                total++;
+              }
+              if (loserName == teamName) {
+                total++;
+              }
+            }
+          }
+          // push data onto graph
+          x.push(i);
+          y.push(winCount/total);
+        }
+        makePlotly( x, y, standard_deviation );
       }
+
+      // data visualization function makePlotly()
+      function makePlotly( x, y, standard_deviation ){
+        var plotDiv = document.getElementById("plot");
+        var traces = [{
+          x: x,
+          y: y
+        }];
+        Plotly.newPlot('graph', traces,
+        {title: 'Team Win Ratio'});
+      };
+
+      // calls makeplot() function
+      makeplot();
     });
   });
-
-});
-
-function makeplot() {
- 	Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv", function(data){ processData(data) } );
-
-};
-
-function processData(allRows) {
-
-	console.log(allRows);
-	var x = [], y = [], standard_deviation = [];
-  const teamName = $('#teamFind').val();
-  console.log(teamName);
-  var rowNum = allRows.length;
-  console.log(rowNum);
-  var numLoops = Math.ceil(rowNum/20);
-  console.log(numLoops);
-
-  for (var i=0; i<numLoops; i++) {
-    var winCount = 0;
-    var loseCount = 0;
-    var total = 0;
-    for (var j=(20*i); j<(20*(i+1)); j++) {
-      row = allRows[j];
-      console.log(row);
-      if (row[Winner] == teamName) {
-        winCount++;
-        total++;
-      }
-      if (row[Loser] == teamName) {
-        loseCount++;
-        total++;
-      }
-    }
-    x.push(i);
-    y.push(winCount/total);
-  }
-
-/*
-	for (var i=0; i<allRows.length; i++) {
-    for (var i*)
-    xNum = 0;
-    yNum = 0;
-		row = allRows[i];
-		x.push(xNum);
-		y.push( row['AAPL_y'] );
-    x++;
-	}
-  */
-	console.log( 'X',x, 'Y',y, 'SD',standard_deviation );
-	makePlotly( x, y, standard_deviation );
-}
-
-function makePlotly( x, y, standard_deviation ){
-	var plotDiv = document.getElementById("plot");
-	var traces = [{
-		x: x,
-		y: y
-	}];
-
-	Plotly.newPlot('myDiv', traces,
-		{title: 'Plotting CSV data from AJAX call'});
-};
-  makeplot();
 </script>
 </head>
 <body>
@@ -115,48 +103,47 @@ function makePlotly( x, y, standard_deviation ){
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/player">Players</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/team">Teams</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/prediction">Predict</a>
-          </li>
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/player">Players</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/team">Teams</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/prediction">Predict</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div style="text-align: center">
+    <input id="teamFind" placeholder="Find a Team (e.g. GSW)" style="width: 80%; margin-top: 16px; height: 48px"></input>
+    <button class="btn" id="team-btn">Search</button>
+  </div>
+  <h1>Team Detail</h1>
+  <div class="content-card" id="team-detail">
+    <div class="player-bio">
+      <div class="player-picture-wrapper">
+        <img class="player-picture" id="team-logo" src="#"></img>
       </div>
-    </nav>
-
-<input id="teamFind" placeholder="Enter team"></input>
-<button class="btn" id="team-btn">Search</button>
-
-<h1>Team Detail</h1>
-<div class="content-card" id="team-detail">
-  <div class="player-bio">
-    <div class="player-picture-wrapper">
-      <img class="player-picture" id="team-logo" src="#"></img>
+      <h2 id="team-name"></h2>
     </div>
-    <h2 id="team-name"></h2>
-  </div>
-  <div class="player-information" id="one">
-    <h3>Overall Record</h3>
-    <p id="overall-record"></p>
-    <h3>Home</h3>
-    <p id="home-record"></p>
-    <h3>Away</h3>
-    <p id="away-record"></p>
-  </div>
-</div>
-  <div class="two-section" id="left-double-section">
-    <h1>2017-2018 Roster</h1>
-    <div class="content-card">
-      <ol type ="1" id="roster">
-
-      </ol>
+    <div class="player-information" id="one">
+      <h3>Overall Record</h3>
+      <p id="overall-record"></p>
+      <h3>Home</h3>
+      <p id="home-record"></p>
+      <h3>Away</h3>
+      <p id="away-record"></p>
     </div>
   </div>
-<div id="myDiv"></div>
+  <h1>Team Roster</h1>
+  <div class="content-card">
+    <div id="roster"></div>
+  </div>
+  <h1>Team Performance</h1>
+  <div class="content-card">
+    <div id="graph"></div>
+  </div>
 </body>
