@@ -86,8 +86,10 @@
           x: x,
           y: y
         }];
-        Plotly.newPlot('graph', traces,
-        {title: 'Team Win Ratio'});
+        var layout = {
+          yaxis: {range: [0, 1]}
+        };
+        Plotly.newPlot('graph', traces, layout);
       };
 
       // calls makeplot() function
