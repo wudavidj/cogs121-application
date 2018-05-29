@@ -51,30 +51,36 @@
         var x = [], y = [], standard_deviation = [];
         // obtain team name
         const teamName = $('#teamFind').val();
-        var rowNum = allRows.length;
-        var numLoops = Math.ceil(rowNum/20);
+        //var rowNum = allRows.length;
+        //var numLoops = Math.ceil(rowNum/20);
         var winCount = 0;
         var total = 0;
+        var j=0;
         // loop through game history
-        for (var i=0; i<numLoops; i++) {
-          for (var j=(20*i); j<(20*(i+1)); j++) {
-            if (j < allRows.length) {
-              row = allRows[j];
-              winnerName = row['Winner'];
-              loserName = row['Loser'];
-              // builds graph data
-              if (winnerName == teamName) {
-                winCount++;
-                total++;
-              }
-              if (loserName == teamName) {
-                total++;
-              }
-            }
+        for (var i=0; i<allRows.length; i++) {
+          var gamePlayed = false;
+          row = allRows[i];
+          winnerName = row['Winner'];
+          loserName = row['Loser'];
+          // builds graph data
+          if (winnerName == teamName) {
+            console.log("winner match");
+            winCount++;
+            total++;
+            j++;
+            gamePlayed = true;
+          }
+          if (loserName == teamName) {
+            console.log("loser match");
+            total++;
+            j++;
+            gamePlayed = true;
           }
           // push data onto graph
-          x.push(i);
-          y.push(winCount/total);
+          if (gamePlayed == true) {
+            x.push(j);
+            y.push(winCount/total);
+          }
         }
         makePlotly( x, y, standard_deviation );
       }
