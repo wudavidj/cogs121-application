@@ -1273,4 +1273,8 @@ Fri Apr 28 2017,Washington Wizards,115,Atlanta Hawks,99,Washington Wizards,Atlan
 Fri Apr 28 2017,Boston Celtics,105,Chicago Bulls,83,Boston Celtics,Chicago Bulls,BOS,CHI
 Fri Apr 28 2017,Los Angeles Clippers,98,Utah Jazz,93,Los Angeles Clippers,Utah Jazz,LAC,UTA
 Sun Apr 30 2017,Washington Wizards,111,Boston Celtics,123,Boston Celtics,Washington Wizards,BOS,WAS
+<<<<<<< HEAD
 Sun Apr 30 2017,Utah Jazz,104,Los Angeles Clippers,91,Utah Jazz,Los Angeles Clippers,UTA,LAC
+=======
+Sun Apr 30 2017,Utah Jazz,104,Los Angeles Clippers,91,Utah Jazz,Los Angeles Clippers,UTA,LAC
+>>>>>>> 3a8b600cc5512ef052909edaf284ee77294413a4
