@@ -42,52 +42,38 @@
 
 
 
-      // data visualization function makeplot()
+      // DATA VISUALIZATION
       function makeplot() {
-        // calls processData()
         Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
       };
 
-      // data visualization function processData()
       function processData(allRows) {
         var x = [], y = [], standard_deviation = [];
-        // obtain team name
-        const teamName = $('#teamFind').val();
-        //var rowNum = allRows.length;
-        //var numLoops = Math.ceil(rowNum/20);
-        var winCount = 0;
-        var total = 0;
-        var j=0;
-        // loop through game history
+        var gamesWon = 0;
+        var totalGames = 0;
+
         for (var i=0; i<allRows.length; i++) {
           var gamePlayed = false;
-          row = allRows[i];
-          winnerName = row['Winner'];
-          loserName = row['Loser'];
-          // builds graph data
-          if (winnerName == teamName) {
-            console.log("winner match");
-            winCount++;
-            total++;
-            j++;
+
+          if (allRows[i]['Winner'] == $('#teamFind').val()) {
+            gamesWon++;
+            totalGames++;
             gamePlayed = true;
           }
-          if (loserName == teamName) {
-            console.log("loser match");
-            total++;
-            j++;
+
+          if (allRows[i]['Loser'] == $('#teamFind').val()) {
+            totalGames++;
             gamePlayed = true;
           }
-          // push data onto graph
-          if (gamePlayed == true) {
-            x.push(j);
-            y.push(winCount/total);
+
+          if (gamePlayed) {
+            x.push(totalGames);
+            y.push(gamesWon/totalGames);
           }
         }
         makePlotly( x, y, standard_deviation );
       }
 
-      // data visualization function makePlotly()
       function makePlotly( x, y, standard_deviation ){
         var plotDiv = document.getElementById("plot");
         var traces = [{
@@ -99,8 +85,6 @@
         };
         Plotly.newPlot('graph', traces, layout);
       };
-
-      // calls makeplot() function
       makeplot();
     });
   });
