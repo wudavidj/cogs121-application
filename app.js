@@ -86,6 +86,8 @@ if ('development' == app.get('env')) {
 
 //Show all players to the screen
 app.get('/players', (req,res) =>{
+  var queryParameter = req.query;
+  console.log(queryParameter);
 	players.all('SELECT * FROM playerstable', (err, rows) => {
     res.send(rows);
   });

@@ -19,9 +19,6 @@
 
     $('#searchButton').click(() => {
       const reqUrl = 'players/' + $('#nameBox').val();
-      /*
-      TODO: WORK ON REMOVE SPACE BETWEEN NAMES
-      */
       console.log(reqUrl);
       $.ajax({
         url: reqUrl,
@@ -175,13 +172,13 @@
               <span class="border border-warning"></span>
               <div class="card-body" id="player-list">
                 <ol type="1">
-                  <li id="rank1"><a href="/players/JamesHarden">James Harden</a></li>
+                  <li id="rank1"><a href="#">James Harden</a></li>
                   <li id="rank2"><a href="/players/AnthonyDavis">Anthony Davis</a></li>
                   <li id="rank3"><a href="/players/GiannisAntetokounmpo">Giannis Antetokounmpo</a></li>
                   <li id="rank4"><a href="/players/DamianLillard">Damian Lillard</a></li>
                   <li id="rank5"><a href="/players/Stephen Curry">Stephen Curry</a></li>
                 </ol>
-                <button id="more-players" type="button" class="btn btn-warning"><a>More Players</a></button>
+                <!--<button id="more-players" type="button" class="btn btn-warning"><a>More Players</a></button>-->
               </div>
             </div>
           </div>
