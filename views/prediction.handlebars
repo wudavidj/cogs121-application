@@ -15,7 +15,9 @@ $(document).ready(() => {
   $('#prediction-btn').click(() => {
     const firstTeam = $('#predictionTeam1').val();
     const secondTeam = $('#predictionTeam2').val();
-
+    const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
+    const firstSearch = teamUrl + firstTeam + '-2018.png';
+    const secondSearch = teamUrl + secondTeam + '-2018.png';
     $.ajax({
       url: 'teams/' + firstTeam,
       type: 'GET',
@@ -27,7 +29,7 @@ $(document).ready(() => {
         const second = Number(record[1]);
         const prob = Math.round((first / (first + second)) * 100);
         console.log("Probability: " + prob);
-        $('#predictions').append("<tr><td>" + firstTeam + "</td>" + "<td>vs.</td>" + "<td>" + secondTeam + "<td>Probability of " + firstTeam + " winning: <b>" + prob + "%</b></td>");
+        $('#predictions').append("<tr><td>" + firstTeam + ' <img src="' + firstSearch + '"></img>'+ "</td>" + "<td>vs.</td>" + "<td>" + secondTeam + ' <img src="' + secondSearch + '"></img>' + "<td>Probability of " + firstTeam + " winning: <b>" + prob + "%</b></td>");
       },
     });
   });

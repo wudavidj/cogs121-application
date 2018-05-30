@@ -109,7 +109,7 @@ app.get('/players/:playerName', (req,res) => {
   }
   const fullName = first + " " + last;
   players.all(
-    'SELECT * FROM playerstable WHERE name = $name', //SQL query
+    'SELECT * FROM playerstable WHERE name LIKE $name', //SQL query
     { $name: fullName}, //parameters to pass into SQL query
     (err, rows) => {
       if(rows.length > 0){
