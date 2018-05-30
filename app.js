@@ -25,6 +25,7 @@ const games = new sqlite3.Database('games.db');
 
 const request = require('request');
 const cheerio = require('cheerio');
+const rp = require('request-promise');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -41,20 +42,41 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/scrape', (req, res) =>{
-  const url = 'https://www.basketball-reference.com/players/j/jamesle01/shooting/2018';
-  res.send({});
-  request(url, (error, res, html) => {
-    if(!error){
-      const $ = cheerio.load(html);
-      const first = null;
-      const second = null;
-      const third = null;
-      const fourth = null;
-      const json = {first: "", second:"", third:"",fourth:""};
-      console.log($);
+app.get('/scrape/:name', (req, res) =>{
+  const playerSearch = req.params.name;
+  let first = playerSearch.charAt(0);
+  let last = "";
+  let found = false;
+  for(let x=1; x < playerSearch.length; x++){
+    if(playerSearch.charAt(x) == playerSearch.charAt(x).toUpperCase()){
+      found = true;
     }
-  })
+    if(found){
+      last += playerSearch.charAt(x);
+    }else{
+      first += playerSearch.charAt(x);
+    }
+  }
+  const shortUrl = last.substring(0,5).toLowerCase() + first.substring(0,2).toLowerCase();
+  const fgUrl = 'https://www.basketball-reference.com/players/' + last[0].toLowerCase() + '/' + shortUrl + '01/shooting/2018';
+  const test = [];
+  rp(fgUrl)
+    .then((data) =>{
+      let $ = cheerio.load(data);
+      $('tr').each(function(i, element){
+        var a = $(this).prev();
+        //console.log(a.text());
+        if(a.text().includes("1st") || a.text().includes("2nd") || a.text().includes("3rd") || a.text().includes("4th")){
+          //console.log(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
+          test.push(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
+        }
+        if(a.text().includes("minutes")){
+          //console.log(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
+          test.push(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
+        }
+      });
+      res.send(test);
+    })
 });
 
 // development only
