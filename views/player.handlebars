@@ -91,10 +91,28 @@ $(document).ready(() => {
         $('#blocks2').html(data.block);
         $('#points2').html(data.points);
         $('#minutes2').html(data.minutesPlayed);
+
+        updateCellColor("#field-goal1", "#field-goal2", data.fieldGoalPercent);
+        updateCellColor("#free-throw1", "#free-throw2", data.freeThrowPercent);
+        updateCellColor("#assists1", "#assists2", data.assist);
+        updateCellColor("#steals1", "#steals2", data.steal);
+
+
+
       },
     });
   });
 });
+
+function updateCellColor(field1, field2, data) {
+  if (parseFloat($(field1).html()) > parseFloat(data.fieldGoalPercent)) {
+    $(field1).css("background-color", "yellow");
+    console.log("hightlighting 1");
+  } else {
+    $(field2).css("background-color", "yellow");
+    console.log("hightlighting 2");
+  }
+}
 </script>
 </head>
 <body>
@@ -124,7 +142,8 @@ $(document).ready(() => {
 </div>
 <h1>Player Detail</h1>
 <div class="content-card" id="player-detail">
-  <div class="player-bio">
+  <div class="row">
+  <div class="player-bio col-3">
     <div class="player-picture-wrapper">
       <img style="height: 100%; width: auto;" id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
     </div>
@@ -132,7 +151,7 @@ $(document).ready(() => {
       <h2 id="player-name"></h2>
     </div>
   </div>
-  <div class="container">
+  <div class="container col-9">
   <div class="row">
     <div class="col-sm" >
 
