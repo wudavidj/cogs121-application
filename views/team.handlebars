@@ -82,7 +82,13 @@
                  y: y
                }];
                var layout = {
-                 yaxis: {range: [0, 1]}
+                 yaxis: {
+                   range: [0, 1],
+                   title: "Win Percentage"
+                 },
+                 xaxis: {
+                   title: "Games Played by " + $('#teamFind').val()
+                 },
                };
                Plotly.newPlot('graph', traces, layout);
              };
