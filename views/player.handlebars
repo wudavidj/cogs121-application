@@ -109,11 +109,14 @@ $(document).ready(() => {
 });
 
 function updateCellColor(field1, field2, data) {
-  if (parseFloat($(field1).html()) > parseFloat(data.fieldGoalPercent)) {
-    $(field1).css("background-color", "yellow");
+  $(field1).css("background-color", "white");
+  $(field2).css("background-color", "white");
+
+  if (parseFloat($(field1).html()) > parseFloat($(field2).html())) {
+    $(field1).css("background-color", "bisque");
     console.log("hightlighting 1");
   } else {
-    $(field2).css("background-color", "yellow");
+    $(field2).css("background-color", "bisque");
     console.log("hightlighting 2");
   }
 }
