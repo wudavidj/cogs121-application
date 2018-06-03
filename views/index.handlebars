@@ -2,17 +2,12 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <link href="/css/main.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
+  <link href="/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
-
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
   <title>Home</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
   $(document).ready(() => {
-
     $('#more-players').click(() => {
       $('#rank5').append("<li id='rank6'><a href='/players/Kevin Durant'>Kevin Durant</a></li><li id='rank7'><a href='/players/Russell Westbrook'>Russell Westbrook</a></li><li id='rank8'><a href='/players/DeMarcus Cousins'>DeMarcus Cousins</a></li><li id='rank9'><a href='/players/Devin Booker'>Devin Booker</a></li><li id='rank10'><a href='/players/Kyrie Irving'>Kyrie Irving</a></li>");
     });
@@ -147,7 +142,7 @@
     <img href="/" src="../logo.png" alt="Logo" style="height: 36px; margin-right: 16px"></img>
     <a class="navbar-brand" href="/" style="color: #E67747; font-weight: 600;">basket.</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"></span>
     </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -163,7 +158,6 @@
         </ul>
       </div>
     </nav>
-
     <div class="container">
       <div class="row" style="margin-top: 16px">
         <div class="col" style="margin-bottom: 32px">
@@ -178,11 +172,9 @@
                   <li id="rank4"><a href="/players/DamianLillard">Damian Lillard</a></li>
                   <li id="rank5"><a href="/players/Stephen Curry">Stephen Curry</a></li>
                 </ol>
-                <!--<button id="more-players" type="button" class="btn btn-warning"><a>More Players</a></button>-->
               </div>
             </div>
           </div>
-
         <div class="col">
             <h1>Overall Standings</h1>
             <div class="card" style="width: 18rem;">
@@ -220,12 +212,9 @@
                     <div id="away5"></div>
                   </li>
                 </ol>
-                <!--<button type="button" class="btn btn-warning"><a href="/team">More Teams</a></button>-->
               </div>
             </div>
           </div>
-
-
           <div class="col">
               <h1>Upcoming Games</h1>
               <div class="card" style="width: 18rem;">
@@ -238,14 +227,12 @@
                     <li id="rank4">Raptors vs. Pelicans</li>
                     <li id="rank5">Nets vs. Knicks</li>
                   </ol>
-                  <!--<button type="button" class="btn btn-warning">More Games</button>-->
                 </div>
               </div>
             </div>
         </div>
       </div>
     </div>
-
     <div class="row" style="margin-left:16px; margin-right:16px">
       <div class="col-sm-6">
       <div class="card">
@@ -256,12 +243,10 @@
         </div>
       </div>
     </div>
-
     <div class="col-sm-6">
       <div class="card">
           <span class="border border-warning"></span>
         <div class="card-body" style= "max-height: 399px; overflow:scroll;">
-
           <h5 class="card-title">Trending</h5>
           <a class="twitter-timeline" href="https://twitter.com/wojespn?ref_src=twsrc%5Etfw">Tweets by wojespn</a>
           <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -269,24 +254,19 @@
       </div>
     </div>
   </div>
-
-
-    <hr/>
-
-
-<div id="name"></div>
-<div id="position"></div>
-<div id="fieldGoal"></div>
-<div id="freeThrow"></div>
-<div id="rebounds"></div>
-<div id="assists"></div>
-<div id="steals"></div>
-<div id="blocks"></div>
-<div id="minutes"></div>
-<div id="points"></div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <hr/>
+  <div id="name"></div>
+  <div id="position"></div>
+  <div id="fieldGoal"></div>
+  <div id="freeThrow"></div>
+  <div id="rebounds"></div>
+  <div id="assists"></div>
+  <div id="steals"></div>
+  <div id="blocks"></div>
+  <div id="minutes"></div>
+  <div id="points"></div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html>
