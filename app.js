@@ -11,8 +11,6 @@ const handlebars = require('express3-handlebars');
 const index = require('./routes/index');
 const player = require('./routes/player');
 const team = require('./routes/team');
-const comparePlayer = require('./routes/comparePlayer');
-const compareTeam = require('./routes/compareTeam');
 const prediction = require('./routes/prediction');
 // Example route
 // const user = require('./routes/user');
@@ -180,11 +178,8 @@ app.get('/matches/:teamName', (req,res) => {
 });
 
 app.get('/', index.view);
-//app.get('/indexOriginal', indexOriginal.view);
 app.get('/player', player.view);
 app.get('/team', team.view);
-app.get('/comparePlayer', comparePlayer.view);
-app.get('/compareTeam', compareTeam.view);
 app.get('/prediction', prediction.view);
 // Example route
 // app.get('/users', user.list);
