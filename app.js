@@ -56,7 +56,10 @@ app.get('/scrape/:name', (req, res) =>{
     }
   }
   const shortUrl = last.substring(0,5).toLowerCase() + first.substring(0,2).toLowerCase();
-  const fgUrl = 'https://www.basketball-reference.com/players/' + last[0].toLowerCase() + '/' + shortUrl + '01/shooting/2018';
+  let fgUrl = 'https://www.basketball-reference.com/players/' + last[0].toLowerCase() + '/' + shortUrl + '01/shooting/2018';
+  if((first == "Anthony" && last == "Davis") || (first == "Markieff" && last == "Morris")){
+    fgUrl = 'https://www.basketball-reference.com/players/' + last[0].toLowerCase() + '/' + shortUrl + '02/shooting/2018'
+  }
   const test = [];
   rp(fgUrl)
     .then((data) =>{

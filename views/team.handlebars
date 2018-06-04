@@ -1,161 +1,245 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Team</title>
-      <link href="/css/styles.css" rel="stylesheet">
-      <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <!-- Plotly.js -->
-      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-      <script>
-         $(document).ready(() => {
-           $('#team-btn').click(() => {
-             const teamSearch = $('#teamFind').val() + '-2018.png';
-             const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
-             //console.log(teamUrl + teamSearch);
-             //console.log('/teams/' + $('#teamFind').val());
-             $('#roster').empty();
-             $.ajax({
-               url: '/teams/' + $('#teamFind').val().toUpperCase(),
-               type: 'GET',
-               dataType: 'json',
-               success: (data) => {
-                 $('#team-logo').attr('src', teamUrl + teamSearch);
-                 $('#team-name').html(data.team);
-                 $('#overall-record').html(data.overall);
-                 $('#home-record').html(data.home);
-                 $('#away-record').html(data.road);
-               },
-             });
-             $.ajax({
-               url:'/findTeam/' + $('#teamFind').val().toUpperCase(),
-               type: 'GET',
-               dataType: 'json',
-               success: (data) => {
-                 for(let x=0; x<data.length; x++){
-                   //for(let y=0; y<data.length; y++)
-                   //console.log(data[x].name);
-                   $('#roster').append($("<li></li>").text( data[x].name));
-                 }
-               }
-             });
+<head>
+  <title>Team</title>
+  <link href="/css/styles.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css" > -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+     $(document).ready(() => {
+       var parameters = location.search.substring(1).split("&");
+       //If there are parameters within URL
+       if(parameters != ""){
+         var temp = parameters[0].split("=");
+         let teamName = unescape(temp[1]);
+         const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
+         $('#roster').empty();
+         $.ajax({
+           url: '/teams/' + teamName.toUpperCase(),
+           type: 'GET',
+           dataType: 'json',
+           success: (data) => {
+             $('#team-logo').attr('src', teamUrl + teamName + '-2018.png');
+             $('#team-name').html(data.team);
+             $('#overall-record').html(data.overall);
+             $('#home-record').html(data.home);
+             $('#away-record').html(data.road);
+           },
+         });
+         $.ajax({
+           url:'/findTeam/' + teamName.toUpperCase(),
+           type: 'GET',
+           dataType: 'json',
+           success: (data) => {
+             for(let x=0; x<data.length; x++){
+               $('#roster').append($("<li></li>").text( data[x].name));
+             }
+           }
+         });
 
+         // DATA VISUALIZATION
+         function makeplot() {
+           Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
+         };
 
+         function processData(allRows) {
+           var x = [], y = [], standard_deviation = [];
+           var gamesWon = 0;
+           var totalGames = 0;
 
-             // DATA VISUALIZATION
-             function makeplot() {
-               Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
-             };
+           for (var i=0; i<allRows.length; i++) {
+             var gamePlayed = false;
 
-             function processData(allRows) {
-               var x = [], y = [], standard_deviation = [];
-               var gamesWon = 0;
-               var totalGames = 0;
-
-               for (var i=0; i<allRows.length; i++) {
-                 var gamePlayed = false;
-
-                 if (allRows[i]['Winner'] == $('#teamFind').val()) {
-                   gamesWon++;
-                   totalGames++;
-                   gamePlayed = true;
-                 }
-
-                 if (allRows[i]['Loser'] == $('#teamFind').val()) {
-                   totalGames++;
-                   gamePlayed = true;
-                 }
-
-                 if (gamePlayed) {
-                   x.push(totalGames);
-                   y.push(gamesWon/totalGames);
-                 }
-               }
-               makePlotly( x, y, standard_deviation );
+             if (allRows[i]['Winner'] == teamName) {
+               gamesWon++;
+               totalGames++;
+               gamePlayed = true;
              }
 
-             function makePlotly( x, y, standard_deviation ){
-               var plotDiv = document.getElementById("plot");
-               var traces = [{
-                 x: x,
-                 y: y
-               }];
-               var layout = {
-                 yaxis: {
-                   range: [0, 1],
-                   title: "Win Percentage"
-                 },
-                 xaxis: {
-                   title: "Games Played by " + $('#teamFind').val()
-                 },
-               };
-               Plotly.newPlot('graph', traces, layout);
-             };
-             makeplot();
-           });
+             if (allRows[i]['Loser'] == teamName) {
+               totalGames++;
+               gamePlayed = true;
+             }
+
+             if (gamePlayed) {
+               x.push(totalGames);
+               y.push(gamesWon/totalGames);
+             }
+           }
+           makePlotly( x, y, standard_deviation );
+         }
+
+         function makePlotly( x, y, standard_deviation ){
+           var plotDiv = document.getElementById("plot");
+           var traces = [{
+             x: x,
+             y: y
+           }];
+           var layout = {
+             yaxis: {
+               range: [0, 1],
+               title: "Win Percentage"
+             },
+             xaxis: {
+               title: "Games Played by " + teamName
+             },
+           };
+           Plotly.newPlot('graph', traces, layout);
+         };
+         makeplot();
+       }
+
+
+//Buttons
+       $('#team-btn').click(() => {
+         const teamSearch = $('#teamFind').val() + '-2018.png';
+         const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
+         //console.log(teamUrl + teamSearch);
+         //console.log('/teams/' + $('#teamFind').val());
+         $('#roster').empty();
+         $.ajax({
+           url: '/teams/' + $('#teamFind').val().toUpperCase(),
+           type: 'GET',
+           dataType: 'json',
+           success: (data) => {
+             $('#team-logo').attr('src', teamUrl + teamSearch);
+             $('#team-name').html(data.team);
+             $('#overall-record').html(data.overall);
+             $('#home-record').html(data.home);
+             $('#away-record').html(data.road);
+           },
          });
-      </script>
-   </head>
-   <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <img href="/" src="../logo.png" alt="Logo" style="height: 36px; margin-right: 16px"></img>
-         <a class="navbar-brand" href="/" style="color: #E67747; font-weight: 600;">basket.</a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-               <li class="nav-item">
-                  <a class="nav-link" href="/player">Players</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/team">Teams</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/prediction">Predict</a>
-               </li>
-            </ul>
-         </div>
-      </nav>
-      <div style="text-align: center">
-         <input id="teamFind" placeholder="Find a Team (e.g. GSW)" style="width: 80%; margin-top: 16px; height: 48px"></input>
-         <button class="btn" id="team-btn">Search</button>
-      </div>
-      <h1>Team Detail</h1>
-      <div class="content-card" id="team-detail">
-         <div class="row">
-            <div class="player-bio col-3">
-               <div class="player-picture-wrapper">
-                  <img class="player-picture" id="team-logo" src="https://image.flaticon.com/icons/png/128/158/158387.png"></img>
-               </div>
-               <h2 id="team-name"></h2>
-            </div>
-            <div class="container col-9">
-               <div class="row">
-                  <div class="col-sm" >
-                     <p style="font-size: 2rem">Overall Record</p>
-                     <p id="overall-record" style="font-size: 2rem; background-color: lemonchiffon"</p>
-                  </div>
-                  <div class="col-sm">
-                     <p style="font-size: 2rem">Home</p>
-                     <p id="home-record" style="font-size: 2rem; background-color: lemonchiffon"</p>
-                  </div>
-                  <div class="col-sm">
-                     <p style="font-size: 2rem">Away</p>
-                     <p id="away-record" style="font-size: 2rem; background-color: lemonchiffon"></p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <h1>Team Roster</h1>
-      <div class="content-card">
-         <div id="roster"> </div>
-      </div>
-      <h1>Team Performance</h1>
-      <div class="content-card">
-         <div id="graph"></div>
-      </div>
-   </body>
+         $.ajax({
+           url:'/findTeam/' + $('#teamFind').val().toUpperCase(),
+           type: 'GET',
+           dataType: 'json',
+           success: (data) => {
+             for(let x=0; x<data.length; x++){
+               //for(let y=0; y<data.length; y++)
+               //console.log(data[x].name);
+               $('#roster').append($("<li></li>").text( data[x].name));
+             }
+           }
+         });
+
+
+
+         // DATA VISUALIZATION
+         function makeplot() {
+           Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
+         };
+
+         function processData(allRows) {
+           var x = [], y = [], standard_deviation = [];
+           var gamesWon = 0;
+           var totalGames = 0;
+
+           for (var i=0; i<allRows.length; i++) {
+             var gamePlayed = false;
+
+             if (allRows[i]['Winner'] == $('#teamFind').val()) {
+               gamesWon++;
+               totalGames++;
+               gamePlayed = true;
+             }
+
+             if (allRows[i]['Loser'] == $('#teamFind').val()) {
+               totalGames++;
+               gamePlayed = true;
+             }
+
+             if (gamePlayed) {
+               x.push(totalGames);
+               y.push(gamesWon/totalGames);
+             }
+           }
+           makePlotly( x, y, standard_deviation );
+         }
+
+         function makePlotly( x, y, standard_deviation ){
+           var plotDiv = document.getElementById("plot");
+           var traces = [{
+             x: x,
+             y: y
+           }];
+           var layout = {
+             yaxis: {
+               range: [0, 1],
+               title: "Win Percentage"
+             },
+             xaxis: {
+               title: "Games Played by " + $('#teamFind').val()
+             },
+           };
+           Plotly.newPlot('graph', traces, layout);
+         };
+         makeplot();
+       });
+     });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <img href="/" src="../logo.png" alt="Logo" style="height: 36px; margin-right: 16px"></img>
+     <a class="navbar-brand" href="/" style="color: #E67747; font-weight: 600;">basket.</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+              <a class="nav-link" href="/player">Players</a>
+           </li>
+           <li class="nav-item">
+              <a class="nav-link" href="/team">Teams</a>
+           </li>
+           <li class="nav-item">
+              <a class="nav-link" href="/prediction">Predict</a>
+           </li>
+        </ul>
+     </div>
+  </nav>
+  <div style="text-align: center">
+     <input id="teamFind" placeholder="Find a Team (e.g. GSW)" style="width: 80%; margin-top: 16px; height: 48px"></input>
+     <button class="btn" id="team-btn">Search</button>
+  </div>
+  <h1>Team Detail</h1>
+  <div class="content-card" id="team-detail">
+     <div class="row">
+        <div class="player-bio col-3">
+           <div class="player-picture-wrapper">
+              <img class="player-picture" id="team-logo" src="https://image.flaticon.com/icons/png/128/158/158387.png"></img>
+           </div>
+           <h2 id="team-name"></h2>
+        </div>
+        <div class="container col-9">
+           <div class="row">
+              <div class="col-sm" >
+                 <p style="font-size: 2rem">Overall Record</p>
+                 <p id="overall-record" style="font-size: 2rem; background-color: lemonchiffon"</p>
+              </div>
+              <div class="col-sm">
+                 <p style="font-size: 2rem">Home</p>
+                 <p id="home-record" style="font-size: 2rem; background-color: lemonchiffon"</p>
+              </div>
+              <div class="col-sm">
+                 <p style="font-size: 2rem">Away</p>
+                 <p id="away-record" style="font-size: 2rem; background-color: lemonchiffon"></p>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <h1>Team Roster</h1>
+  <div class="content-card">
+     <div id="roster"> </div>
+  </div>
+  <h1>Team Performance</h1>
+  <div class="content-card">
+     <div id="graph"></div>
+  </div>
+</body>
  </html>
