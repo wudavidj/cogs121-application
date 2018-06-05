@@ -11,7 +11,7 @@
   <script>
      $(document).ready(() => {
        var parameters = location.search.substring(1).split("&");
-       //If there are parameters within URL
+       //If there are parameters within URL due to links from home page
        if(parameters != ""){
          var temp = parameters[0].split("=");
          let teamName = unescape(temp[1]);

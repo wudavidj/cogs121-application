@@ -16,11 +16,14 @@ const prediction = require('./routes/prediction');
 // const user = require('./routes/user');
 
 const app = express();
+//variables for each database
 const sqlite3 = require('sqlite3');
 const players = new sqlite3.Database('players.db');
 const teams = new sqlite3.Database('teams.db');
 const games = new sqlite3.Database('games.db');
 
+
+//variables are necessary for web scrapping shooting percentage per quarter
 const request = require('request');
 const cheerio = require('cheerio');
 const rp = require('request-promise');
@@ -40,6 +43,12 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
+
+//GET request to get a player's shooting percentage per quarter
 app.get('/scrape/:name', (req, res) =>{
   const playerSearch = req.params.name;
   let first = playerSearch.charAt(0);
@@ -68,11 +77,9 @@ app.get('/scrape/:name', (req, res) =>{
         var a = $(this).prev();
         //console.log(a.text());
         if(a.text().includes("1st") || a.text().includes("2nd") || a.text().includes("3rd") || a.text().includes("4th")){
-          //console.log(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
           test.push(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
         }
         if(a.text().includes("minutes")){
-          //console.log(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
           test.push(a.text().substring(a.text().indexOf("."),a.text().indexOf(".") + 4));
         }
       });
@@ -80,12 +87,7 @@ app.get('/scrape/:name', (req, res) =>{
     })
 });
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
-//Show all players to the screen
+//GET request that will show a json of all players in the database
 app.get('/players', (req,res) =>{
   var queryParameter = req.query;
   console.log(queryParameter);
@@ -94,7 +96,7 @@ app.get('/players', (req,res) =>{
   });
 });
 
-//grab one players information
+//GET request for grabbing a specific player from the database
 app.get('/players/:playerName', (req,res) => {
 	const playerSearch = req.params.playerName;
   let first = playerSearch.charAt(0);
@@ -123,7 +125,7 @@ app.get('/players/:playerName', (req,res) => {
     });
 });
 
-
+//GET request to find a specific team's data
 app.get('/findTeam/:teamName', (req, res) => {
   const teamSearch = req.params.teamName;
   console.log('TESTING: ' + teamSearch);
@@ -140,7 +142,7 @@ app.get('/findTeam/:teamName', (req, res) => {
     });
 });
 
-//gets all the teams
+//GET request to display all teams in the NBA
 app.get('/teams', (req, res) => {
   teams.all('SELECT team, abv, overall, home, road FROM teamstable', (err, rows) =>{
     res.send(rows);
@@ -148,7 +150,7 @@ app.get('/teams', (req, res) => {
 });
 
 
-//get a single team record
+//GET request to grab a specific teams data
 app.get('/teams/:teamName', (req, res) => {
   const teamSearch = req.params.teamName;
   teams.all('SELECT * FROM teamstable WHERE abv = $team',
@@ -162,17 +164,17 @@ app.get('/teams/:teamName', (req, res) => {
   });
 });
 
-//gets all the matches
+//GET request to grab all games played in the 2017-2018 season
 app.get('/matches', (req,res) => {
   games.all('SELECT visitor, visitorPoints, home, homePoints FROM gamestable', (err, rows) => {
     res.send(rows);
   });
 });
 
+//GET request to grab all games played by a specific team in the 2017-2018 season
 app.get('/matches/:teamName', (req,res) => {
   const teamSearch = req.params.teamName;
   const val = fakeMatches[teamSearch];
-  console.log(val);
   if(val){
     res.send(val);
   }else{
@@ -184,8 +186,7 @@ app.get('/', index.view);
 app.get('/player', player.view);
 app.get('/team', team.view);
 app.get('/prediction', prediction.view);
-// Example route
-// app.get('/users', user.list);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
