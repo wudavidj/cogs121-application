@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+This file, team.handlebars, acts as the "Teams" page for our web application. This page contains a number of key features and pieces of information. First, it contains a search/input bar to allow the user to enter their team of choice. It also allocates a card to display team information, a card for team roster, and a card for team data visualization, powered by Plot.ly. The player information is stored within our back-end database, which we access using a Javascript script that uses GET/POST requests. These allow information to be sent to/from the user on the front end and the database in the back end. As soon as the user enters in their team of choice in the top input field, a GET request is made and the team's information, roster, and visualization is populated.
+-->
 <html>
 <head>
   <title>Team</title>
@@ -45,25 +48,30 @@
            Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
          };
 
+         // function to process data for data visualization
          function processData(allRows) {
            var x = [], y = [], standard_deviation = [];
            var gamesWon = 0;
            var totalGames = 0;
 
+           // loop through every row (i.e. game) in database
            for (var i=0; i<allRows.length; i++) {
              var gamePlayed = false;
 
+             // if winner, then increment appropriately
              if (allRows[i]['Winner'] == teamName) {
                gamesWon++;
                totalGames++;
                gamePlayed = true;
              }
 
+             // if loser, then increment appropriately
              if (allRows[i]['Loser'] == teamName) {
                totalGames++;
                gamePlayed = true;
              }
 
+             // push data onto visualization if appropriate
              if (gamePlayed) {
                x.push(totalGames);
                y.push(gamesWon/totalGames);
@@ -72,6 +80,7 @@
            makePlotly( x, y, standard_deviation );
          }
 
+         // plot.ly specifications
          function makePlotly( x, y, standard_deviation ){
            var plotDiv = document.getElementById("plot");
            var traces = [{
@@ -93,7 +102,7 @@
        }
 
 
-//Buttons
+       //Buttons
        $('#team-btn').click(() => {
          const teamSearch = $('#teamFind').val() + '-2018.png';
          const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
@@ -125,32 +134,35 @@
            }
          });
 
-
-
          // DATA VISUALIZATION
          function makeplot() {
            Plotly.d3.csv("https://raw.githubusercontent.com/wudavidj/cogs121-application/master/gamestatus.csv", function(data){ processData(data) } );
          };
 
+         // function to process data for data visualization
          function processData(allRows) {
            var x = [], y = [], standard_deviation = [];
            var gamesWon = 0;
            var totalGames = 0;
 
+           // loop through every row (i.e. game) in database
            for (var i=0; i<allRows.length; i++) {
              var gamePlayed = false;
 
+             // if winner, then increment appropriately
              if (allRows[i]['Winner'] == $('#teamFind').val()) {
                gamesWon++;
                totalGames++;
                gamePlayed = true;
              }
 
+             // if loser, then increment appropriately
              if (allRows[i]['Loser'] == $('#teamFind').val()) {
                totalGames++;
                gamePlayed = true;
              }
 
+             // push data onto visualization if appropriate
              if (gamePlayed) {
                x.push(totalGames);
                y.push(gamesWon/totalGames);
@@ -159,6 +171,7 @@
            makePlotly( x, y, standard_deviation );
          }
 
+         // plot.ly specifications
          function makePlotly( x, y, standard_deviation ){
            var plotDiv = document.getElementById("plot");
            var traces = [{
