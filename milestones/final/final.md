@@ -7,9 +7,6 @@
 When starting this project, I contributed by providing suggestions on application ideas. In addition, I worked on milestones and provided feedback and suggestions on features/interactions to add into our application. In terms of design, I contributed by creating interface mockups and facilitating in our design-decisions process. I also contributed to development by coding mainly front-end code and some visualizations.
 
 
-paragraph or bullet points briefly describing all of their contributions to your team's project. Note that in general, all team members will receive the same grade unless there are extenuating circumstances. (2 points)
-
-
 
 # Source Code Files
 ## /public/css/main.css
@@ -43,8 +40,7 @@ paragraph or bullet points briefly describing all of their contributions to your
 /player.handlebars is the main page for displaying team information, comparing team, and our data visualization for teams. To implement this page, we used Javascript code on both /team.handlebars as well as in corresponding AJAX calls in /app.js to grab information from our back-end database. From this, we were able to populate the team information on the front-end.
 
 ## /app.js
-
-## /games.db
+/app.js is our Javascript file that connects the client-side to the server-side. It allows HTTP requests to grab information from our database to display on the front-end.
 
 ## /gamestatus.csv
 /gamestatus.csv is our back-end .csv file/database that is used exclusively for our data visualization for teams. It contains games played and the win/loss status of each team. This allows the algorithm on our front-end to determine win percentages for each time when the user wants to see that information on the front-end.
@@ -56,9 +52,8 @@ paragraph or bullet points briefly describing all of their contributions to your
 /NBAplayers.csv is our back-end .csv file/database that stores information regarding each basketball player. The information contained in this file allows us to populate the front-end players page and the players data visualization.
 
 ## /package.json
+/package.json is our file that contains information about our project, website, and code repository. This file also contains information on necessary dependencies that would need to be installed and utilized in order to have the website/app function correctly.
 
-## /players.db
 
-## /teams.db
 
 # Demo Video Link
