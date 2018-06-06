@@ -7,7 +7,7 @@ also created ajax calls on the client side to retrieve the data. Finally, the we
 function to make the heat map that shows which quarter a player's shooting percentage is better/worst.
 The web scrapping was done using packages such as Cheerio to help parse the pages easily.
 ## Neda Khanverdi
-My main role for this project was helping with the design of the web app. I helped design the home page and then I worked on fixing all the design bugs throughout the other pages, helped make the design of all pages similar, and other front end programming throughout the web app. I also helped with creating some user flow by connecting certain pages together. 
+My main role for this project was helping with the design of the web app. I helped design the home page and then I worked on fixing all the design bugs throughout the other pages, helped make the design of all pages similar, and other front end programming throughout the web app. I also helped with creating some user flow by connecting certain pages together.
 ## David Wu
 When starting this project, I contributed by providing suggestions on application ideas. In addition, I worked on milestones and provided feedback and suggestions on features/interactions to add into our application. In terms of design, I contributed by creating interface mockups and facilitating in our design-decisions process. I also contributed to development by coding mainly front-end code and some visualizations.
 
@@ -62,3 +62,5 @@ When starting this project, I contributed by providing suggestions on applicatio
 
 
 # Demo Video Link
+
+https://vimeo.com/273739696
