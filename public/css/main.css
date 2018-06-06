@@ -1,4 +1,5 @@
-
+/* This file, main.css, is one of our CSS stylesheets that we use to enable CSS styling and preserve visual integrity within our web application.
+It contains a font import and a selector for the background color of our application. */
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 
 

@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<!--
+This file, player.handlebars, acts as the "Players" page for our web application.
+This page contains a number of key features and pieces of information.
+First, it contains a search/input bar to allow the user to enter their player of choice.
+It also allocates a card to display player information, a card for player statistics, and a card for player data visualization, powered by Plot.ly.
+The player information is stored within our back-end database, which we access using a Javascript script that uses GET/POST requests.
+These allow information to be sent to/from the user on the front end and the database in the back end.
+As soon as the user enters in their player of choice in the top input field, a GET request is made and the player's information, statistics, and visualization is populated.
+For our statitstics card, the user also has the option of adding an additional player to compare with.
+-->
 <html>
 <head>
   <meta charset="utf-8">
@@ -28,6 +38,7 @@ $(document).ready(() => {
     }
     const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
 
+    // AJAX GET call for data visualization
     $.ajax({
       url: '/scrape/' + first + last,
       type: 'GET',
@@ -47,6 +58,7 @@ $(document).ready(() => {
       },
     });
 
+    // AJAX GET call for player statistics
     $.ajax({
       url: req,
       type: 'GET',
@@ -69,6 +81,7 @@ $(document).ready(() => {
     });
   }
 
+  // when the button is clicked, run this function
   $('#test-btn').click(() => {
     const testSplit = $('#testing').val().split(' ');
     const firstName = testSplit[0];
@@ -81,6 +94,7 @@ $(document).ready(() => {
     }
     const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
 
+    // AJAX GET call for data visualization
     $.ajax({
       url: '/scrape/' + firstName + lastName,
       type: 'GET',
@@ -101,6 +115,7 @@ $(document).ready(() => {
       },
     });
 
+    // AJAX GET call for player statistics
     $.ajax({
       url: req,
       type: 'GET',
@@ -126,7 +141,6 @@ $(document).ready(() => {
     });
   });
 
-
   //COMPARE PLAYER BUTTON
   $('#compare-btn').click(() => {
     const cmpSplit = $('#compareSearch').val().split(' ');
@@ -135,6 +149,7 @@ $(document).ready(() => {
     const req = 'players/' + first + last;
     const cpmImg = last.substring(0,5).toLowerCase() + first.substring(0,2).toLowerCase() + "01.jpg";
     const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
+    // AJAX GET request for information on 2nd player
     $.ajax({
       url: req,
       type: 'GET',
@@ -150,6 +165,7 @@ $(document).ready(() => {
         $('#points2').html(data.points);
         $('#minutes2').html(data.minutesPlayed);
 
+        // color-code "better" player
         updateCellColor("#field-goal1", "#field-goal2", data.fieldGoalPercent);
         updateCellColor("#free-throw1", "#free-throw2", data.freeThrowPercent);
         updateCellColor("#assists1", "#assists2", data.assist);
@@ -162,6 +178,7 @@ $(document).ready(() => {
   });
 });
 
+// function to update cell color for "better" player
 function updateCellColor(field1, field2, data) {
   $(field1).css("background-color", "white");
   $(field2).css("background-color", "white");

@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<!--
+This page, index.handlebars, is the "Home" page for our application.
+This page contains links to all major features of our application, and contains quickly-accessible information that is presented in cards.
+The user, upon loading the "Home" page, can see top player rankings, top team rankings, upcoming games, game highlights, and basketball news.
+The players/teams/games are loaded onto the front-end by Javascript code.
+The game highlights are powered by YouTube's API for integrating videos on websites.
+The basketball news are powered by Twitter's API for integrating Twitter feeds onto websites.
+-->
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,6 +19,7 @@
   });
 </script>
 <script>
+// function for accessing the database to load information onto cards
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 </script>
 <body>
@@ -46,7 +55,7 @@
                   <li id="rank2"><a href="/player?first=Anthony&last=Davis">Anthony Davis</a></li>
                   <li id="rank3"><a href="/player?first=Giannis&last=Antetokounmpo">Giannis Antetokounmpo</a></li>
                   <li id="rank4"><a href="/player?first=Damian&last=Lillard">Damian Lillard</a></li>
-                  <li id="rank5"><a href="/players?first=Stephen&last=Curry">Stephen Curry</a></li>
+                  <li id="rank5"><a href="/player?first=Stephen&last=Curry">Stephen Curry</a></li>
                 </ol>
               </div>
             </div>
@@ -76,6 +85,7 @@
               </div>
             </div>
           </div>
+          <!--
           <div class="col">
               <h1>Upcoming Games</h1>
               <div class="card" style="width: 18rem;">
@@ -91,6 +101,7 @@
                 </div>
               </div>
             </div>
+          -->
         </div>
       </div>
     </div>
