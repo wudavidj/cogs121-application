@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Player</title>
-<link href="/css/styles.css" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  <title>Player</title>
+  <link href="/css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 </script>
 <script>
 $(document).ready(() => {
@@ -34,14 +34,14 @@ $(document).ready(() => {
       dataType: 'json',
       success: (data) =>{
         var split = [
-        {
-          z:[[Number(data[0]) + Number(data[4]) / 2, Number(data[1]) + Number(data[4]) / 2, Number(data[2]) + Number(data[4]) / 2, Number(data[3]) + Number(data[4]) / 2],
+          {
+            z:[[Number(data[0]) + Number(data[4]) / 2, Number(data[1]) + Number(data[4]) / 2, Number(data[2]) + Number(data[4]) / 2, Number(data[3]) + Number(data[4]) / 2],
             [Number(data[0]) + Number(data[5]) / 2, Number(data[1]) + Number(data[5]) / 2, Number(data[2]) + Number(data[5]) / 2, Number(data[3]) + Number(data[5]) / 2],
             [Number(data[0]) + Number(data[6]) / 2, Number(data[1]) + Number(data[6]) / 2, Number(data[2]) + Number(data[6]) / 2, Number(data[3]) + Number(data[6]) / 2]],
-          x: ['First', 'Second', 'Third', 'Fourth'],
-          y: ['< 3 Minutes', '3-6 Minutes', '> 6 Minutes'],
-          type: 'heatmap'
-        }
+            x: ['First', 'Second', 'Third', 'Fourth'],
+            y: ['< 3 Minutes', '3-6 Minutes', '> 6 Minutes'],
+            type: 'heatmap'
+          }
         ];
         Plotly.newPlot('chart1', split);
       },
@@ -88,14 +88,14 @@ $(document).ready(() => {
       success: (data) =>{
         console.log(data);
         var split = [
-        {
-          z:[[Number(data[0]) + Number(data[4]) / 2, Number(data[1]) + Number(data[4]) / 2, Number(data[2]) + Number(data[4]) / 2, Number(data[3]) + Number(data[4]) / 2],
+          {
+            z:[[Number(data[0]) + Number(data[4]) / 2, Number(data[1]) + Number(data[4]) / 2, Number(data[2]) + Number(data[4]) / 2, Number(data[3]) + Number(data[4]) / 2],
             [Number(data[0]) + Number(data[5]) / 2, Number(data[1]) + Number(data[5]) / 2, Number(data[2]) + Number(data[5]) / 2, Number(data[3]) + Number(data[5]) / 2],
             [Number(data[0]) + Number(data[6]) / 2, Number(data[1]) + Number(data[6]) / 2, Number(data[2]) + Number(data[6]) / 2, Number(data[3]) + Number(data[6]) / 2]],
-          x: ['First', 'Second', 'Third', 'Fourth'],
-          y: ['< 3 Minutes', '3-6 Minutes', '> 6 Minutes'],
-          type: 'heatmap'
-        }
+            x: ['First', 'Second', 'Third', 'Fourth'],
+            y: ['< 3 Minutes', '3-6 Minutes', '> 6 Minutes'],
+            type: 'heatmap'
+          }
         ];
         Plotly.newPlot('chart1', split);
       },
@@ -112,6 +112,8 @@ $(document).ready(() => {
         $('#player-age').html(data.age);
         $('#name1').html(data.name);
         $('#player-team').html(data.team);
+        const teamSearch = "/team?name=" + data.team;
+        $('#player-team').attr('href',teamSearch);
         $('#player-position').html(data.position);
         $('#field-goal1').html(data.fieldGoalPercent);
         $('#free-throw1').html(data.freeThrowPercent);
@@ -181,100 +183,100 @@ function updateCellColor(field1, field2, data) {
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/player">Players</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/team">Teams</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/prediction">Predict</a>
-          </li>
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/player">Players</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/team">Teams</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/prediction">Predict</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div style="text-align: center">
+    <input id="testing" placeholder="Find a Player" style="width: 80%; margin-top: 16px; height: 48px"></input>
+    <button class="btn" id="test-btn">Search</button>
+  </div>
+  <h1>Player Detail</h1>
+  <div class="content-card" id="player-detail">
+    <div class="row">
+      <div class="player-bio col-3">
+        <div class="player-picture-wrapper">
+          <img style="height: 100%; width: auto;" id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
+        </div>
+        <div>
+          <h2 id="player-name"></h2>
+        </div>
       </div>
-    </nav>
-<div style="text-align: center">
-<input id="testing" placeholder="Find a Player" style="width: 80%; margin-top: 16px; height: 48px"></input>
-<button class="btn" id="test-btn">Search</button>
-</div>
-<h1>Player Detail</h1>
-<div class="content-card" id="player-detail">
-  <div class="row">
-  <div class="player-bio col-3">
-    <div class="player-picture-wrapper">
-      <img style="height: 100%; width: auto;" id="player-picture" src='https://image.flaticon.com/icons/png/128/158/158387.png'></img>
-    </div>
-    <div>
-      <h2 id="player-name"></h2>
-    </div>
-  </div>
-  <div class="container col-9">
-  <div class="row">
-    <div class="col-sm" >
+      <div class="container col-9">
+        <div class="row">
+          <div class="col-sm" >
 
-      <p style="font-size: 2rem">Position</p>
-      <p id="player-position" style="font-size: 2rem; background-color: lemonchiffon"</p>
-     </div>
-    <div class="col-sm">
+            <p style="font-size: 2rem">Position</p>
+            <p id="player-position" style="font-size: 2rem; background-color: lemonchiffon"</p>
+            </div>
+            <div class="col-sm">
 
-      <p style="font-size: 2rem">Team</p>
-      <p id="player-team" style="font-size: 2rem; background-color: lemonchiffon"</p>
-    </div>
-    <div class="col-sm">
+              <p style="font-size: 2rem">Team</p>
+              <a id="player-team" href="/team?name="  style="font-size: 2rem; background-color: lemonchiffon"></a>
+              </div>
+              <div class="col-sm">
 
-      <p style="font-size: 2rem">Age</p>
-      <p id="player-age" style="font-size: 2rem; background-color: lemonchiffon"></p>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-  <h1>2017-2018 Statistics</h1>
+                <p style="font-size: 2rem">Age</p>
+                <p id="player-age" style="font-size: 2rem; background-color: lemonchiffon"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1>2017-2018 Statistics</h1>
 
-  <div class="content-card" id="player-statistics" style="overflow-x: scroll;">
-    <table>
-      <tr>
-        <td></td>
-        <td class="data-label">Field Goal %</td>
-        <td class="data-label">Free Throw %</td>
-        <td class="data-label">Assists per Game</td>
-        <td class="data-label">Steals per Game</td>
-        <td class="data-label">Blocks per Game</td>
-        <td class="data-label">Points per Game</td>
-        <td class="data-label">Minutes per Game</td>
-      </tr>
-      <tr>
-        <td class="name-label" id="name1">Player 1</td>
-        <td class="data-value" id="field-goal1"></td>
-        <td class="data-value" id="free-throw1"></td>
-        <td class="data-value" id="assists1"></td>
-        <td class="data-value" id="steals1"></td>
-        <td class="data-value" id="blocks1"></td>
-        <td class="data-value" id="points1"></td>
-        <td class="data-value" id="minutes1"></td>
-      </tr>
-      <tr>
-        <td class="name-lable" id="name2">Player 2</td>
-        <td class="data-value" id="field-goal2"></td>
-        <td class="data-value" id="free-throw2"></td>
-        <td class="data-value" id="assists2"></td>
-        <td class="data-value" id="steals2"></td>
-        <td class="data-value" id="blocks2"></td>
-        <td class="data-value" id="points2"></td>
-        <td class="data-value" id="minutes2"></td>
-      </tr>
-    </table>
-    <div>
-      <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
-    </div>
-  </div>
-<div>
-  <h1>Players Field Goal Percentage Per Quarter</h1>
-  <div class="container" id="chart1">
-  </div>
-</div>
-</body>
-</html>
+      <div class="content-card" id="player-statistics" style="overflow-x: scroll;">
+        <table>
+          <tr>
+            <td></td>
+            <td class="data-label">Field Goal %</td>
+            <td class="data-label">Free Throw %</td>
+            <td class="data-label">Assists per Game</td>
+            <td class="data-label">Steals per Game</td>
+            <td class="data-label">Blocks per Game</td>
+            <td class="data-label">Points per Game</td>
+            <td class="data-label">Minutes per Game</td>
+          </tr>
+          <tr>
+            <td class="name-label" id="name1">Player 1</td>
+            <td class="data-value" id="field-goal1"></td>
+            <td class="data-value" id="free-throw1"></td>
+            <td class="data-value" id="assists1"></td>
+            <td class="data-value" id="steals1"></td>
+            <td class="data-value" id="blocks1"></td>
+            <td class="data-value" id="points1"></td>
+            <td class="data-value" id="minutes1"></td>
+          </tr>
+          <tr>
+            <td class="name-lable" id="name2">Player 2</td>
+            <td class="data-value" id="field-goal2"></td>
+            <td class="data-value" id="free-throw2"></td>
+            <td class="data-value" id="assists2"></td>
+            <td class="data-value" id="steals2"></td>
+            <td class="data-value" id="blocks2"></td>
+            <td class="data-value" id="points2"></td>
+            <td class="data-value" id="minutes2"></td>
+          </tr>
+        </table>
+        <div>
+          <input class="form-control mr-sm-2" id="compareSearch"  placeholder="Add a Player to Compare" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" id="compare-btn">Search</button>
+        </div>
+      </div>
+      <div>
+        <h1>Players Field Goal Percentage Per Quarter</h1>
+        <div class="container" id="chart1">
+        </div>
+      </div>
+    </body>
+    </html>
