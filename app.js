@@ -1,6 +1,12 @@
-
-/**
- * Module dependencies.
+/*
+This javascript file is necessary for connecting the client side to the server side
+-The main functionality of this page for creating our HTTP requests for grabbing
+a specific player, team, or match for the user to view. Our application is used for
+comparing and analyzing simple player/team stats so there are not many requests
+that we need to create
+-This file also works with packages that allow us to conduct web scrapping activities
+in order to grab a players shooting percentage by each quarter and their percentage
+with a certain time left within each quarter
  */
 
 const express = require('express');
@@ -12,8 +18,6 @@ const index = require('./routes/index');
 const player = require('./routes/player');
 const team = require('./routes/team');
 const prediction = require('./routes/prediction');
-// Example route
-// const user = require('./routes/user');
 
 const app = express();
 //variables for each database
