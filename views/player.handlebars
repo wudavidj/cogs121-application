@@ -38,6 +38,7 @@ $(document).ready(() => {
     }
     const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
 
+    // AJAX GET call for data visualization
     $.ajax({
       url: '/scrape/' + first + last,
       type: 'GET',
@@ -57,6 +58,7 @@ $(document).ready(() => {
       },
     });
 
+    // AJAX GET call for player statistics
     $.ajax({
       url: req,
       type: 'GET',
@@ -79,6 +81,7 @@ $(document).ready(() => {
     });
   }
 
+  // when the button is clicked, run this function
   $('#test-btn').click(() => {
     const testSplit = $('#testing').val().split(' ');
     const firstName = testSplit[0];
@@ -91,6 +94,7 @@ $(document).ready(() => {
     }
     const playerUrl = 'https://d2cwpp38twqe55.cloudfront.net/req/201804182/images/players/';
 
+    // AJAX GET call for data visualization
     $.ajax({
       url: '/scrape/' + firstName + lastName,
       type: 'GET',
@@ -111,6 +115,7 @@ $(document).ready(() => {
       },
     });
 
+    // AJAX GET call for player statistics
     $.ajax({
       url: req,
       type: 'GET',
@@ -133,7 +138,6 @@ $(document).ready(() => {
       },
     });
   });
-
 
   //COMPARE PLAYER BUTTON
   $('#compare-btn').click(() => {
