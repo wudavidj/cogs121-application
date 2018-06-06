@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!--
+This page, prediction.handlebars, displays our Prediction page.
+The user, on this page, can see top teams and hypothetical games and win probabiltiies between them.
+If the user wishes, they can add two of their own teams to compete in a hypothetical game.
+Upon adding the two teams, they can see the probability of a win in the form of a percentage.
+This players are loaded through our Javascript code on the front-end, which contains AJAX calls to get information from our database.
+From the database, the logic implemented in our front-end code will calculate the percentage probability that a team wins against another team.
+This probability is then appended to the bottom of the existing list.
+-->
 <html>
 <head>
 <title>Prediction</title>
@@ -12,23 +21,27 @@
 </script>
 <script>
 $(document).ready(() => {
+  // when the prediction button is clicked, run this function
   $('#prediction-btn').click(() => {
     const firstTeam = $('#predictionTeam1').val();
     const secondTeam = $('#predictionTeam2').val();
     const teamUrl = "https://d2p3bygnnzw9w3.cloudfront.net/req/201805011/tlogo/bbr/";
     const firstSearch = teamUrl + firstTeam + '-2018.png';
     const secondSearch = teamUrl + secondTeam + '-2018.png';
+    // AJAX GET request for team data
     $.ajax({
       url: 'teams/' + firstTeam,
       type: 'GET',
       dataType: 'json',
       success: (data) => {
         console.log(data);
+        // logic for determining prediction
         const record = data[secondTeam].split('-');
         const first = Number(record[0]);
         const second = Number(record[1]);
         const prob = Math.round((first / (first + second)) * 100);
         console.log("Probability: " + prob);
+        // append the prediction to the list of matches
         $('#predictions').append("<tr><td>" + firstTeam + ' <img src="' + firstSearch + '"></img>'+ "</td>" + "<td>vs.</td>" + "<td>" + secondTeam + ' <img src="' + secondSearch + '"></img>' + "<td>Probability of " + firstTeam + " winning: <b>" + prob + "%</b></td>");
       },
     });
