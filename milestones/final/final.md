@@ -1,6 +1,11 @@
 # Team Member Contributions
 ## Kevin Gong
-
+For this project, my main contribution was creating the database, handling all the HTTP requests,
+and web scrapping. I created the database using SQLite and had three separate databases, players,
+teams, and matches. For the HTTP requests, I created different GET requests for the server side and
+also created ajax calls on the client side to retrieve the data. Finally, the web scrapping was a necessary
+function to make the heat map that shows which quarter a player's shooting percentage is better/worst.
+The web scrapping was done using packages such as Cheerio to help parse the pages easily.
 ## Neda Khanverdi
 
 ## David Wu
